@@ -36,5 +36,10 @@
             <h2>{{trans('app.settings.salary_components.main')}}</h2>
         </a>
     </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a class="nav-box" href="{{route('settings.currency.index')}}">
+            <h2>{{trans('app.settings.currency.main')}}</h2>
+        </a>
+    </div>
 </div>
 @endsection

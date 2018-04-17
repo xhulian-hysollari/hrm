@@ -116,6 +116,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
             'update' => 'salary_components.update',
             'destroy' => 'salary_components.destroy'
         ]]);
+        Route::get('currency/datatable', '\App\Modules\Settings\Http\Controllers\CurrencyController@getDatatable')
+            ->name('currency.datatable');
+
+        Route::resource('currency', '\App\Modules\Settings\Http\Controllers\CurrencyController', ['names' => [
+            'index' => 'currency.index',
+            'create' => 'currency.create',
+            'show' => 'currency.show',
+            'edit' => 'currency.edit',
+            'store' => 'currency.store',
+            'update' => 'currency.update',
+            'destroy' => 'currency.destroy'
+        ]]);
     });
     Route::group(['prefix' => 'pim', 'as' => 'pim.', 'middleware' => ['auth', 'admin']], function() {
         Route::get('/', function() {

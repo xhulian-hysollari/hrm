@@ -280,6 +280,42 @@ Breadcrumbs::register('settings.salary_components.show', function($breadcrumbs, 
 });
 
 /**
+ * Currency breadcrumbs start here
+ */
+
+// Home > Settings > Currency
+Breadcrumbs::register('settings.currency.index', function($breadcrumbs)
+{
+    $breadcrumbs->parent('settings.index');
+    $breadcrumbs->push(trans('app.settings.currency.main'), route('settings.currency.index'));
+});
+
+// Home > Settings > Currency > Create
+Breadcrumbs::register('settings.currency.create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('settings.currency.index');
+    $breadcrumbs->push(trans('app.add_record'), route('settings.currency.create'));
+});
+
+// Home > Settings > Currency > Edit
+Breadcrumbs::register('settings.currency.edit', function($breadcrumbs, $breadcrumb)
+{
+    $breadcrumbs->parent('settings.currency.index');
+    $breadcrumbs->push(trans('app.edit').': '.$breadcrumb['title'], route('settings.currency.edit', $breadcrumb['id']));
+});
+
+// Home > Settings > Currency > Details
+Breadcrumbs::register('settings.currency.show', function($breadcrumbs, $breadcrumb)
+{
+    $breadcrumbs->parent('settings.currency.index');
+    $breadcrumbs->push($breadcrumb['title'], route('settings.currency.show', $breadcrumb['id']));
+});
+
+/**
+ * Currency breadcrumbs end here
+ */
+
+/**
  * Job positions breadcrumbs end here
  */
 

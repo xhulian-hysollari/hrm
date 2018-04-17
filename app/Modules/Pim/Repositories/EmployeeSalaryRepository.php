@@ -2,10 +2,10 @@
 
 namespace App\Modules\Pim\Repositories;
 
+use App\Modules\Settings\Models\Currency;
 use DB;
 use App\Repositories\EloquentRepository;
 use App\Modules\Pim\Models\Salary;
-use App\Modules\Pim\Models\Currency;
 use App\Modules\Pim\Models\CurrentSalary;
 use Carbon\Carbon;
 use App\Modules\Pim\Repositories\Interfaces\EmployeeSalaryRepositoryInterface;
