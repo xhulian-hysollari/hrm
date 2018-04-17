@@ -12,10 +12,8 @@
             <table class="table table-bordered table-hover" id="positionsTable">
                 <thead>
                     <th>{{trans('app.id')}}</th>
-                    <th>{{trans('app.settings.currency.name')}}</th>
-                    <th>{{trans('app.settings.currency.contract_type')}}</th>
-                    <th>{{trans('app.settings.currency.type')}}</th>
-                    <th>{{trans('app.settings.currency.is_cost')}}</th>
+                    <th>{{trans('app.settings.currency.code')}}</th>
+                    <th>{{trans('app.settings.currency.display')}}</th>
                     <th></th>
                 </thead>
                 <tfoot>
@@ -23,16 +21,10 @@
                         <input type="text" placeholder="{{trans('app.id')}}"/>
                     </th>
                     <th>
-                        <input type="text" placeholder="{{trans('app.settings.currency.name')}}"/>
+                        <input type="text" placeholder="{{trans('app.settings.currency.code')}}"/>
                     </th>
                     <th>
-                        {!! Form::select('contract_type_id', $contractTypes, null, ['placeholder' => trans('app.settings.currency.contract_type')]) !!}
-                    </th>
-                    <th>
-                        {!! Form::select('type', salary_component_types(), null, ['placeholder' => trans('app.settings.currency.type')]) !!}
-                    </th>
-                    <th>
-                        {!! Form::select('is_cost', [trans('app.no'), trans('app.yes')], null, ['placeholder' => trans('app.settings.currency.type')]) !!}
+                        <input type="text" placeholder="{{trans('app.settings.currency.display')}}"/>
                     </th>
                     <th></th>
                 </tfoot>
