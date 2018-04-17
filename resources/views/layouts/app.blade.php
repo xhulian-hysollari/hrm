@@ -35,8 +35,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'HRM') }}
+                    <a class="navbar-brand" href="{{ url('/') }}" style="padding:0">
+                        <img src="http://forcontact.com/wp-content/uploads/2018/01/logo_Forcontact_nuovo_Google-e1516734469445.png" style="height: 50px;">
                     </a>
                 </div>
             </div>
