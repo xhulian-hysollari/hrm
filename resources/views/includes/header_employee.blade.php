@@ -8,7 +8,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{route('employee.home')}}">{{ config('app.name', 'HRM') }}</a>
+      <a class="navbar-brand" href="{{route('employee.home')}}" style="padding:0">
+        <img src="http://forcontact.com/wp-content/uploads/2018/01/logo_Forcontact_nuovo_Google-e1516734469445.png" style="height: 50px;">
+      </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
