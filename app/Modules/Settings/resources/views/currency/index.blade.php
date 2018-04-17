@@ -46,11 +46,9 @@
             ajax: '{{ route("settings.currency.datatable")}}',
             columns: [
                 {data: 0, name: 'id'},
-                {data: 1, name: 'name'},
-                {data: 2, name: 'contract_type_id'},
-                {data: 3, name: 'type'},
-                {data: 4, name: 'is_cost'},
-                {data: 5, name: 'actions', sortable: false, searchable: false}
+                {data: 1, name: 'currency_code'},
+                {data: 2, name: 'currency_display'},
+                {data: 3, name: 'actions', sortable: false, searchable: false}
             ]
         });
         table.columns().every(function () {
