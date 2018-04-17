@@ -4,7 +4,6 @@ namespace App\Modules\Settings\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Settings\Http\Requests\CurrencyRequest;
-use App\Modules\Settings\Http\Requests\SalaryComponentRequest;
 use App\Modules\Settings\Repositories\Interfaces\CurrencyRepositoryInterface as CurrencyRepository;
 use Illuminate\Http\Request;
 use Datatables;
@@ -62,10 +61,10 @@ class CurrencyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Modules\Settings\Http\Requests\SalaryComponentRequest  $request
+     * @param CurrencyRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SalaryComponentRequest $request)
+    public function store(CurrencyRequest $request)
     {
         $currencyData = $this->currencyRepository->create($request->all());
         $request->session()->flash('success', trans('app.settings.currency.store_success'));
