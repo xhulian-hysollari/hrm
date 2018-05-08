@@ -55,6 +55,9 @@ class User extends Authenticatable
         'interview_1',
         'interview_2',
         'language',
+        'structure',
+        'emergency_contact',
+        'contact',
     ];
 
     /**
