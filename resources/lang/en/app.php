@@ -129,6 +129,7 @@ return [
             'main' => 'Currencies',
             'code' => 'Currency Code',
             'display' => 'Currency Name',
+            'add_new' => 'Add New Currencies',
         ]
     ],
     'pim' => [
