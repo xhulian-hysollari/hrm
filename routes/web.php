@@ -423,7 +423,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 });
 Route::group(['prefix' => 'reception', 'middleware' => ['auth', 'reception']], function() {
     Route::get('/', '\App\Http\Controllers\Reception\HomeController@index')
-        ->name('home');
+        ->name('reception.home');
     Route::get('visitor/datatable', '\App\Modules\Employee\Leaves\Http\Controllers\LeavesController@getDatatable')
         ->name('visitor.datatable');
 
