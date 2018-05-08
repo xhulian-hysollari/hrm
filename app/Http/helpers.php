@@ -129,6 +129,7 @@ function get_document_template_type($type)
 function gender($gender) 
 {
     $genders = [
+        '' => 'Select Gender',
         'm' => 'Male',
         'f' => 'Female'
     ];
