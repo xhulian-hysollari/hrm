@@ -229,7 +229,8 @@ class EmployeesController extends Controller
                     $first_name = $reader->getCell(sprintf('C%s', $startRow))->getValue();
                     $last_name = $reader->getCell(sprintf('E%s', $startRow))->getValue();
                     $email = trim($reader->getCell(sprintf('O%s', $startRow))->getValue());
-                    $emailValue =  (isset($email) && $email != "" ) ? $email : strtolower($first_name) . '.' . strtolower($last_name) . '@forcontact.com';
+                    $personalMail =  (isset($email) && $email != "" ) ? $email : strtolower($first_name) . '.' . strtolower($last_name) . '@forcontact.com';
+                    $emailValue =  strtolower($first_name) . '.' . strtolower($last_name) . '@forcontact.com';
                     $parsedData = [
                         'first_name' => $first_name,
                         'last_name' => $last_name,
@@ -244,6 +245,7 @@ class EmployeesController extends Controller
                         'profession' => $reader->getCell(sprintf('M%s', $startRow))->getValue(),
                         'active' => $reader->getCell(sprintf('B%s', $startRow))->getValue(),
                         'role' => '2',
+                        'personal_email' => $personalMail,
                         'email' => $emailValue,
                     ];
                     $user = User::create($parsedData);
