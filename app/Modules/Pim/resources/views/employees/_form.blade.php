@@ -5,6 +5,18 @@
     </div>
 </div>
 <div class="form-group">
+    {!! Form::label('father_name', 'Father Name:', ['class' => 'col-sm-3']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('father_name', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('matricola', 'Matricola:', ['class' => 'col-sm-3']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('matricola', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="form-group">
     {!! Form::label('last_name', trans('app.pim.employees.last_name').':', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
         {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
@@ -14,6 +26,12 @@
     {!! Form::label('email', trans('app.pim.employees.email').':', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
         {!! Form::input('email', 'email', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('personal_email', 'Personal Email:', ['class' => 'col-sm-3']) !!}
+    <div class="col-sm-6">
+        {!! Form::input('personal_email', 'personal_email', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 <div class="form-group">
