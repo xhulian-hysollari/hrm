@@ -124,6 +124,9 @@ return [
                 'earning' => 'Earning',
                 'deduction' => 'Deduction'
             ]
+        ],
+        'currency' => [
+            'main' => 'Currencies'
         ]
     ],
     'pim' => [
@@ -221,7 +224,7 @@ return [
                     'year' => 'Year',
                     'grade' => 'Grade',
                     'start_date' => 'Start date',
-                    'end_date' => 'End date',    
+                    'end_date' => 'End date',
                     'store_success' => 'The education details were successfully added.',
                     'update_success' => 'The education details were successfully updated.',
                     'delete_success' => 'The education details were successfully removed.',
