@@ -59,6 +59,18 @@
     </div>
 </div>
 <div class="form-group">
+    {!! Form::label('profession', 'Job Position:', ['class' => 'col-sm-3']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('profession', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('bank_account', 'Bank Account:', ['class' => 'col-sm-3']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('bank_account', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="form-group">
     {!! Form::label('gender', trans('app.pim.employees.gender').':', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
         {!! Form::label('male', trans('app.pim.employees.gender_male')) !!}
