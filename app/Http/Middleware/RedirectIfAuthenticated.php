@@ -23,6 +23,8 @@ class RedirectIfAuthenticated
                 return redirect()->to('/employee');
             } else if (Auth::user()->role == User::USER_ROLE_ADMIN) {
                 return redirect()->to('/admin');
+            } else if (Auth::user()->role == User::USER_ROLE_RECEPTION) {
+                return redirect()->to('/reception');
             }
         }
 

@@ -5,8 +5,11 @@ namespace App\Modules\Pim\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Modules\Pim\Http\Requests\EmployeeRequest;
 use App\Modules\Pim\Repositories\Interfaces\EmployeeRepositoryInterface as EmployeeRepository;
+use App\User;
 use Datatables;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Mail\Mailer;
 use Illuminate\Support\Facades\Route;
@@ -49,9 +52,9 @@ class EmployeesController extends Controller
     public function getDatatable()
     {
         return Datatables::of($this->employeeRepository->getCollection(
-                [['key' => 'role', 'operator' => '=', 'value' => $this->employeeRepository->model::USER_ROLE_EMPLOYEE]],
-                ['id', 'first_name', 'last_name', 'email']))
-            ->addColumn('actions', function($employee){
+            [['key' => 'role', 'operator' => '=', 'value' => $this->employeeRepository->model::USER_ROLE_EMPLOYEE]],
+            ['id', 'first_name', 'last_name', 'email']))
+            ->addColumn('actions', function ($employee) {
                 return view('includes._datatable_actions', [
                     'deleteUrl' => route('pim.employees.destroy', $employee->id),
                     'editUrl' => route('pim.employees.edit', $employee->id)
@@ -122,13 +125,12 @@ class EmployeesController extends Controller
             'name' => $employeeData->first_name,
             'system' => config('app.name'),
             'url' => url('/'),
-            'email' =>  $employeeData->email,
-            'password' => $password, 
+            'email' => $employeeData->email,
+            'password' => $password,
             'change_pass_route' => url('password/reset'),
             'signature' => env('APP_NAME', 'HRM')
-            ];
-        Mail::send('emails.employee-login-password', $data, function($message) use ($employeeData)
-        {
+        ];
+        Mail::send('emails.employee-login-password', $data, function ($message) use ($employeeData) {
             $message->subject(trans('emails.employee_login.subject', ['name' => config('app.name')]));
             $message->to($employeeData['email']);
         });
@@ -154,10 +156,10 @@ class EmployeesController extends Controller
     public function edit($id)
     {
         $employee = $this->employeeRepository->getById($id);
-        if($employee->role == $this->employeeRepository->model::USER_ROLE_CANDIDATE) {
+        if ($employee->role == $this->employeeRepository->model::USER_ROLE_CANDIDATE) {
             return redirect()->route('pim.candidates.edit', $id);
         }
-        return view('pim::employees.edit', ['employee' => $employee, 'breadcrumb' => ['title' => $employee->first_name.' '.$employee->last_name, 'id' => $employee->id]]);
+        return view('pim::employees.edit', ['employee' => $employee, 'breadcrumb' => ['title' => $employee->first_name . ' ' . $employee->last_name, 'id' => $employee->id]]);
     }
 
     /**
@@ -186,5 +188,148 @@ class EmployeesController extends Controller
         $this->employeeRepository->delete($id);
         $request->session()->flash('success', trans('app.pim.employees.delete_success'));
         return redirect()->route('pim.employees.index');
+    }
+
+    public function uploadCandidates()
+    {
+        $file = Input::file('attachment');
+        $data = [];
+        $maxR = [];
+        Excel::selectSheetsByIndex(1)->load($file, function ($reader) use (&$data, &$maxR) {
+            $objExcel = $reader->getExcel();
+            $sheet = $objExcel->getSheet(1);
+            $maxR = $sheet->getHighestRow();
+            $data = $this->parse($sheet, $maxR);
+        });
+    }
+
+    public function uploadEmployees()
+    {
+        $file = Input::file('attachment');
+        $data = [];
+        $maxR = [];
+        Excel::selectSheetsByIndex(0)->load($file, function ($reader) use (&$data, &$maxR) {
+            $objExcel = $reader->getExcel();
+            $sheet = $objExcel->getSheet(0);
+            $maxR = $sheet->getHighestRow();
+            $data = $this->parseEmployees($sheet, $maxR);
+        });
+        return redirect()->route('pim.employees.index');
+    }
+
+    protected function parseEmployees($reader, $maxRow)
+    {
+        $startRow = 4;
+        $skills = [];
+        do {
+            if (
+                trim($reader->getCell(sprintf('F%s', $startRow))->getValue() !== "")
+            ) {
+                if ($reader->getCell(sprintf('B%s', $startRow))->getValue() == "SI") {
+                    $first_name = $reader->getCell(sprintf('C%s', $startRow))->getValue();
+                    $last_name = $reader->getCell(sprintf('E%s', $startRow))->getValue();
+                    $email = trim($reader->getCell(sprintf('O%s', $startRow))->getValue());
+                    $emailValue =  (isset($email) && $email != "" ) ? $email : strtolower($first_name) . '.' . strtolower($last_name) . '@forcontact.com';
+                    $parsedData = [
+                        'first_name' => $first_name,
+                        'last_name' => $last_name,
+                        'father_name' => $reader->getCell(sprintf('D%s', $startRow))->getValue(),
+                        'contact' => $reader->getCell(sprintf('N%s', $startRow))->getValue(),
+                        'birth_date' => $reader->getCell(sprintf('H%s', $startRow))->getValue(),
+                        'matricola' => $reader->getCell(sprintf('G%s', $startRow))->getValue(),
+                        'birthplace' => $reader->getCell(sprintf('J%s', $startRow))->getValue(),
+                        'id_card' => $reader->getCell(sprintf('I%s', $startRow))->getValue(),
+                        'education_title' => $reader->getCell(sprintf('L%s', $startRow))->getValue(),
+                        'address' => $reader->getCell(sprintf('K%s', $startRow))->getValue(),
+                        'profession' => $reader->getCell(sprintf('M%s', $startRow))->getValue(),
+                        'active' => $reader->getCell(sprintf('B%s', $startRow))->getValue(),
+                        'role' => '2',
+                        'email' => $emailValue,
+                    ];
+                    $user = User::create($parsedData);
+                }
+                $startRow += 1;
+            }
+        } while ($startRow <= $maxRow);
+    }
+
+    protected function parse($reader, $maxRow)
+    {
+        $startRow = 2;
+        $skills = [];
+        do {
+            if (
+                trim($reader->getCell(sprintf('A%s', $startRow))->getValue()) &&
+                trim($reader->getCell(sprintf('B%s', $startRow))->getValue()) &&
+                trim($reader->getCell(sprintf('C%s', $startRow))->getValue()) &&
+                trim($reader->getCell(sprintf('D%s', $startRow))->getValue()) &&
+                trim($reader->getCell(sprintf('F%s', $startRow))->getValue())
+            ) {
+                $parsedData = [
+                    'first_name' => $reader->getCell(sprintf('A%s', $startRow))->getValue(),
+                    'last_name' => $reader->getCell(sprintf('B%s', $startRow))->getValue(),
+                    'father_name' => $reader->getCell(sprintf('B%s', $startRow))->getValue(),
+//                    'comment' => $reader->getCell(sprintf('M%s', $startRow))->getValue(),
+//                    'interview_1' => $reader->getCell(sprintf('J%s', $startRow))->getValue(),
+//                    'interview_2' => $reader->getCell(sprintf('N%s', $startRow))->getValue(),
+//                    'contact' => $reader->getCell(sprintf('L%s', $startRow))->getValue(),
+//                    'language' => $reader->getCell(sprintf('K%s', $startRow))->getValue(),
+//                    'contact' => Carbon::createFromFormat('d.m.Y', $reader->getCell(sprintf('F%s', $startRow))->getValue()), //-1 is added to fix the date shift by 1
+                    'role' => '3',
+                    'email' => uniqid() . '@gmail.com',
+                ];
+                $user = User::create($parsedData);
+                if ($reader->getCell(sprintf('C%s', $startRow))->getValue() !== 'No') {
+                    $skills[] = [
+                        'user_id' => $user->id,
+                        'skill' => 'Italian',
+                        'evaluation' => $reader->getCell(sprintf('C%s', $startRow))->getValue(),
+                    ];
+                }
+                if ($reader->getCell(sprintf('D%s', $startRow))->getValue() !== 'No') {
+                    $skills[] = [
+                        'user_id' => $user->id,
+                        'skill' => 'English',
+                        'evaluation' => $reader->getCell(sprintf('D%s', $startRow))->getValue(),
+                    ];
+                }
+                if ($reader->getCell(sprintf('E%s', $startRow))->getValue() !== 'No') {
+                    $skills[] = [
+                        'user_id' => $user->id,
+                        'skill' => 'German',
+                        'evaluation' => $reader->getCell(sprintf('E%s', $startRow))->getValue(),
+                    ];
+                }
+                if ($reader->getCell(sprintf('F%s', $startRow))->getValue() !== 'No') {
+                    $skills[] = [
+                        'user_id' => $user->id,
+                        'skill' => 'Spanish',
+                        'evaluation' => $reader->getCell(sprintf('F%s', $startRow))->getValue(),
+                    ];
+                }
+                if ($reader->getCell(sprintf('G%s', $startRow))->getValue() !== 'No') {
+                    $skills[] = [
+                        'user_id' => $user->id,
+                        'skill' => 'Turkish',
+                        'evaluation' => $reader->getCell(sprintf('G%s', $startRow))->getValue(),
+                    ];
+                }
+                if ($reader->getCell(sprintf('H%s', $startRow))->getValue() !== 'No') {
+                    $skills[] = [
+                        'user_id' => $user->id,
+                        'skill' => 'French',
+                        'evaluation' => $reader->getCell(sprintf('H%s', $startRow))->getValue(),
+                    ];
+                }
+                if ($reader->getCell(sprintf('I%s', $startRow))->getValue() !== 'No') {
+                    $skills[] = [
+                        'user_id' => $user->id,
+                        'skill' => 'Greek',
+                        'evaluation' => $reader->getCell(sprintf('I%s', $startRow))->getValue(),
+                    ];
+                }
+            }
+            $startRow += 1;
+        } while ($startRow <= $maxRow);
     }
 }

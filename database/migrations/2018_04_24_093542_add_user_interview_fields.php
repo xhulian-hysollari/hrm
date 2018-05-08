@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCurrencySoftDelete extends Migration
+class AddUserInterviewFields extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class AddCurrencySoftDelete extends Migration
      */
     public function up()
     {
-        Schema::table('currencies', function ($table){
-//            $table->softDeletes();
+        Schema::table('users', function ($table){
+            $table->string('interview_1')->nullable();
+            $table->string('interview_2')->nullable();
+            $table->string('language')->nullable();
         });
+
+
     }
 
     /**

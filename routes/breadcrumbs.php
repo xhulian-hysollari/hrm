@@ -946,6 +946,42 @@ Breadcrumbs::register('time.clients.show', function($breadcrumbs, $breadcrumb)
  */
 
 /**
+ * Visitor breadcrumbs start here
+ */
+
+// Home > Visitor
+Breadcrumbs::register('visitor.index', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('app.visitor.main'), route('visitor.index'));
+});
+
+// Home > Visit > Create
+Breadcrumbs::register('visitor.create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('visitor.index');
+    $breadcrumbs->push(trans('app.add_record'), route('visitor.create'));
+});
+
+// Home > Visit > Edit
+Breadcrumbs::register('visitor.edit', function($breadcrumbs, $breadcrumb)
+{
+    $breadcrumbs->parent('visitor.index');
+    $breadcrumbs->push(trans('app.edit').': '.$breadcrumb['title'], route('visitor.edit', $breadcrumb['id']));
+});
+
+// Home > Visit > Details
+Breadcrumbs::register('visitor.show', function($breadcrumbs, $breadcrumb)
+{
+    $breadcrumbs->parent('visitor.index');
+    $breadcrumbs->push($breadcrumb['title'], route('visitor.show', $breadcrumb['id']));
+});
+
+/**
+ * Clients breadcrumbs end here
+ */
+
+/**
  * Projects breadcrumbs start here
  */
 

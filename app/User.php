@@ -19,6 +19,8 @@ class User extends Authenticatable
     const USER_ROLE_ADMIN = 1;
     const USER_ROLE_EMPLOYEE = 2;
     const USER_ROLE_CANDIDATE = 3;
+    const USER_ROLE_RECEPTION = 4;
+    const USER_ROLE_HR = 5;
 
     use Notifiable;
 
@@ -28,7 +30,31 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'gender', 'birth_date', 'password', 'role', 'notes', 'how_did_they_hear'
+        'first_name',
+        'last_name',
+        'father_name',
+        'email',
+        'personal_email',
+        'gender',
+        'birth_date',
+        'password',
+        'role',
+        'notes',
+        'how_did_they_hear',
+        'is_active',
+        'matricola',
+        'id_card',
+        'birthplace',
+        'address',
+        'education_title',
+        'profession',
+        'contract_type',
+        'bank_account',
+        'is_active',
+        'start_date',
+        'interview_1',
+        'interview_2',
+        'language',
     ];
 
     /**
@@ -42,7 +68,7 @@ class User extends Authenticatable
 
     public function setEmailAttribute($email)
     {
-        if(!$email) {
+        if (!$email) {
             $this->attributes['email'] = null;
         } else {
             $this->attributes['email'] = $email;
@@ -51,7 +77,7 @@ class User extends Authenticatable
 
     public function setBirthDateAttribute($birthDate)
     {
-        if(!$birthDate) {
+        if (!$birthDate) {
             $this->attributes['birth_date'] = null;
         } else {
             $this->attributes['birth_date'] = $birthDate;
@@ -60,7 +86,7 @@ class User extends Authenticatable
 
     public function setNotesAttribute($notes)
     {
-        if(!$notes) {
+        if (!$notes) {
             $this->attributes['notes'] = null;
         } else {
             $this->attributes['notes'] = $notes;

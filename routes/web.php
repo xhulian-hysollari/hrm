@@ -150,11 +150,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
             'update' => 'employees.update',
             'destroy' => 'employees.destroy'
         ]]);
+        Route::post('employees/upload', '\App\Modules\Pim\Http\Controllers\EmployeesController@uploadEmployees')
+            ->name('employees.upload');
         Route::get('employees/resendPassword/{id}', '\App\Modules\Pim\Http\Controllers\EmployeesController@resendPassword')->name('employees.resend_password');
         Route::get('candidates/datatable', '\App\Modules\Pim\Http\Controllers\CandidatesController@getDatatable')
             ->name('candidates.datatable');
         Route::get('candidates/feature/{id}', '\App\Modules\Pim\Http\Controllers\CandidatesController@makeFeatured')
             ->name('candidates.feature');
+        Route::post('candidates/upload', '\App\Modules\Pim\Http\Controllers\CandidatesController@uploadCandidates')
+            ->name('candidates.upload');
         Route::resource('candidates', '\App\Modules\Pim\Http\Controllers\CandidatesController', ['names' => [
             'index' => 'candidates.index',
             'create' => 'candidates.create',
@@ -416,6 +420,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
             'destroy' => 'documents.destroy'
         ]]);      
     });
+});
+Route::group(['prefix' => 'reception', 'middleware' => ['auth', 'reception']], function() {
+    Route::get('/', '\App\Http\Controllers\Reception\HomeController@index')
+        ->name('home');
+    Route::get('visitor/datatable', '\App\Modules\Employee\Leaves\Http\Controllers\LeavesController@getDatatable')
+        ->name('visitor.datatable');
+
+    Route::resource('visitor', '\App\Modules\Visitor\Http\Controllers\VisitorController', ['names' => [
+        'index' => 'visitor.index',
+        'create' => 'visitor.create',
+        'show' => 'visitor.show',
+        'edit' => 'visitor.edit',
+        'store' => 'visitor.store',
+        'update' => 'visitor.update',
+        'destroy' => 'visitor.destroy'
+    ]]);
 });
 Route::group(['prefix' => 'employee', 'as' => 'employee.', 'middleware' => ['auth', 'employee']], function() {
     Route::get('/', '\App\Http\Controllers\Employee\HomeController@index')

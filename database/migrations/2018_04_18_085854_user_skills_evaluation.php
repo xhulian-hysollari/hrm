@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCurrencySoftDelete extends Migration
+class UserSkillsEvaluation extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddCurrencySoftDelete extends Migration
      */
     public function up()
     {
-        Schema::table('currencies', function ($table){
-//            $table->softDeletes();
+        Schema::table('user_skills', function ($table){
+            $table->string('self_evaluation')->nullable();
+            $table->string('evaluation')->nullable();
         });
     }
 

@@ -10,6 +10,7 @@ use App\Modules\Recruitment as Recruitment;
 use App\Modules\Discipline as Discipline;
 use App\Modules\Time as Time;
 use App\Modules\Dashboard as Dashboard;
+use App\Modules\Visitor as Visitor;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -47,6 +48,7 @@ class RepositoryServiceProvider extends ServiceProvider
             Time\Repositories\ProjectRepository::class => [Time\Repositories\Interfaces\ProjectRepositoryInterface::class],
             Time\Repositories\TimeLogRepository::class => [Time\Repositories\Interfaces\TimeLogRepositoryInterface::class],
             Dashboard\Repositories\DashboardDocumentsRepository::class => [Dashboard\Repositories\Interfaces\DashboardDocumentsRepositoryInterface::class],
+            Visitor\Repositories\VisitorRepository::class => [Visitor\Repositories\Interfaces\VisitorRepositoryInterface::class],
         ];
 
         foreach ($bindings as $concrete => $interfaces) {
