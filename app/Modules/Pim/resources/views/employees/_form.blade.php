@@ -11,19 +11,25 @@
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('matricola', 'Matricola:', ['class' => 'col-sm-3']) !!}
-    <div class="col-sm-6">
-        {!! Form::text('matricola', null, ['class' => 'form-control']) !!}
-    </div>
-</div>
-<div class="form-group">
     {!! Form::label('last_name', trans('app.pim.employees.last_name').':', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
         {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('email', trans('app.pim.employees.email').':', ['class' => 'col-sm-3']) !!}
+    {!! Form::label('matricola', 'Matricola:', ['class' => 'col-sm-3']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('matricola', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('id_card', 'ID Card:', ['class' => 'col-sm-3']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('id_card', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('email', 'Company Email:', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
         {!! Form::input('email', 'email', null, ['class' => 'form-control']) !!}
     </div>
@@ -31,7 +37,25 @@
 <div class="form-group">
     {!! Form::label('personal_email', 'Personal Email:', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
-        {!! Form::input('personal_email', 'personal_email', null, ['class' => 'form-control']) !!}
+        {!! Form::input('email', 'personal_email', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('contact', 'Mobile:', ['class' => 'col-sm-3']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('contact', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('emergency_contact', 'Emergency Contact:', ['class' => 'col-sm-3']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('emergency_contact', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('structure', 'Structure:', ['class' => 'col-sm-3']) !!}
+    <div class="col-sm-6">
+        {!! Form::text('structure', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 <div class="form-group">
