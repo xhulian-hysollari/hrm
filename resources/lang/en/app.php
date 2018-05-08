@@ -126,7 +126,9 @@ return [
             ]
         ],
         'currency' => [
-            'main' => 'Currencies'
+            'main' => 'Currencies',
+            'code' => 'Currency Code',
+            'display' => 'Currency Name',
         ]
     ],
     'pim' => [
