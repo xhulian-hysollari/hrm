@@ -228,7 +228,7 @@ class TimeLogsController extends Controller
             $maxR = $sheet->getHighestRow();
             $data = $this->parseLogs($sheet, $maxR);
         });
-        return redirect()->route('pim.employees.index');
+        return redirect()->route('time.time_logs.index');
     }
 
     protected function parseLogs($reader, $maxRow)

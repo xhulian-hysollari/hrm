@@ -38,6 +38,31 @@ return [
     'status' => 'Status',
     'approve' => 'Approve',
 
+    'visitor' => [
+        'main' => 'Visitors',
+        'name' => 'Visitor Full Name',
+        'add_new' => 'Add new visitor',
+        'id_card' => 'ID Card',
+        'attendee' => 'Attendee',
+        'visit_date' => 'Date of the visit',
+        'check_in' => 'Check In Date',
+        'check_out' => 'Check Out Date',
+        'motive' => 'Motive of the visit',
+        'edit_details' => 'Edit Visitor Details',
+    ],
+
+    'training' => [
+        'main' => 'Training',
+        'training_list' => 'Scheduled Trainings',
+        'name' => 'Training Topic',
+        'location' => 'Location',
+        'date' => 'Date',
+        'notes' => 'Notes',
+        'participants' => 'Participants',
+        'edit_details' => 'Edit training event',
+        'add_new' => 'Add new event',
+    ],
+
     'profile' => [
         'main' => 'Profile',
         'update' => 'Update profile details',

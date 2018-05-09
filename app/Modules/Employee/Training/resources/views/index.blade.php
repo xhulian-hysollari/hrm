@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="custom-panel">
-                <div class="custom-panel-heading">{{trans('app.time.time_logs.main')}}</div>
+                <div class="custom-panel-heading">{{trans('app.training.training_list')}}</div>
                 <table class="table table-bordered table-hover" id="trainingTable">
                     <thead>
                     <th>{{trans('app.id')}}</th>

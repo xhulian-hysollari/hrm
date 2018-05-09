@@ -18,7 +18,7 @@
             <!-- MENU ITEMS GO HERE -->
             <ul class="nav navbar-nav">
                 <li class="{{ $current == 'visitor' ? 'active' : ''}}">
-                    <a href="{{route('visitor.index')}}"> {{trans('app.visitor')}}
+                    <a href="{{route('visitor.index')}}"> {{trans('app.visitor.main')}}
                         @if($current == 'visitor')
                             <span class="sr-only">({{trans('app.current')}})</span>
                         @endif

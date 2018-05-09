@@ -1,5 +1,5 @@
 <div class="form-group">
-    {!! Form::label('name', trans('app.time.time_logs.task_name').':', ['class' => 'col-sm-3']) !!}
+    {!! Form::label('name', trans('app.training.name').':', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
         {!! Form::text('name', null, ['class' => 'form-control']) !!}
     </div>
@@ -11,19 +11,19 @@
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('location', trans('app.time.time_logs.task_name').':', ['class' => 'col-sm-3']) !!}
+    {!! Form::label('location', trans('app.training.location').':', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
         {!! Form::text('location', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('notes', trans('app.time.time_logs.task_description').':', ['class' => 'col-sm-3']) !!}
+    {!! Form::label('notes', trans('app.training.notes').':', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
         {!! Form::textarea('notes', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('users', trans('app.time.time_logs.project'), ['class' => 'col-sm-3']) !!}
+    {!! Form::label('users', trans('app.training.participants'), ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
         {!! Form::select('users[]', $users, null, ['class' => 'form-control projects', 'multiple']) !!}
     </div>

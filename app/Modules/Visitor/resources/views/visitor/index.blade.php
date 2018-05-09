@@ -15,15 +15,15 @@
                     <th>{{trans('app.visitor.name')}}</th>
                     <th></th>
                 </thead>
-                {{--<tfoot>--}}
-                    {{--<th>--}}
-                        {{--<input type="text" placeholder="{{trans('app.id')}}"/>--}}
-                    {{--</th>--}}
-                    {{--<th>--}}
-                        {{--<input type="text" placeholder="{{trans('app.visitor.name')}}"/>--}}
-                    {{--</th>--}}
-                    {{--<th></th>--}}
-                {{--</tfoot>--}}
+                <tfoot>
+                    <th>
+                        <input type="text" placeholder="{{trans('app.id')}}"/>
+                    </th>
+                    <th>
+                        <input type="text" placeholder="{{trans('app.visitor.name')}}"/>
+                    </th>
+                    <th></th>
+                </tfoot>
             </table>
         </div>
     </div>
