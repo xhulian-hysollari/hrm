@@ -12,25 +12,21 @@
             <table class="table table-bordered table-hover" id="timeLogTable">
                 <thead>
                     <th>{{trans('app.id')}}</th>
-                    <th>{{trans('app.time.time_logs.task_name')}}</th>
-                    <th>{{trans('app.time.time_logs.project')}}</th>
                     <th>{{trans('app.time.time_logs.time')}}</th>
                     <th>{{trans('app.time.time_logs.date')}}</th>
+                    <th>{{trans('app.time.time_logs.task_name')}}</th>
                     <th></th>
                 </thead>
                 <tfoot>
                     <th>
                         <input type="text" placeholder="{{trans('app.id')}}"/>
                     </th>
-                    <th>
-                        <input type="text" placeholder="{{trans('app.time.time_logs.task_name')}}"/>
-                    </th>
-                    <th>
-                        {!! Form::select('projects_id', $projects, null, ['placeholder' => trans('app.time.time_logs.project')]) !!}
-                    </th>
                     <th></th>
                     <th>
                         <input type="date" placeholder="{{trans('app.time.time_logs.date')}}"/>
+                    </th>
+                    <th>
+                        <input type="text" placeholder="{{trans('app.time.time_logs.task_name')}}"/>
                     </th>
                     <th></th>
                 </tfoot>
