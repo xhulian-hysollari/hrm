@@ -17,7 +17,7 @@ class CreateTimeLogsTable extends Migration
             $table->increments('id');
             $table->string('task_name', 100);
             $table->string('task_description');
-            $table->integer('project_id')->unsigned();
+            $table->integer('project_id')->unsigned()->nullable();
             $table->foreign('project_id')
                 ->references('id')
                 ->on('projects')
