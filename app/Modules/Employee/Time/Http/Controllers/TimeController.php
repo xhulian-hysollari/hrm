@@ -46,10 +46,7 @@ class TimeController extends Controller {
                 'key' => 'user_id',
                 'operator' => '=',
                 'value' => Auth::user()->id
-            ]], ['id', 'task_name', 'project_id', 'time', 'date']))
-            ->editColumn('project_id', function($time) {
-                return $time->project->name;
-            })
+            ]], ['id', 'time', 'date', 'reason']))
             ->addColumn('actions', function($time){
                 return view('includes._datatable_actions', [
                     'deleteUrl' => route('employee.time.destroy', $time->id), 

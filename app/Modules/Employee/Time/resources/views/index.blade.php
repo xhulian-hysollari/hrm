@@ -52,11 +52,10 @@
             ajax: '{{ route("employee.time.datatable")}}',
             columns: [
                 {data: 0, name: 'id'},
-                {data: 1, name: 'task_name'},
-                {data: 2, name: 'project_id'},
-                {data: 3, name: 'time', sortable: true, searchable: false},
-                {data: 4, name: 'date'},
-                {data: 5, name: 'actions', sortable: false, searchable: false}
+                {data: 1, name: 'time', sortable: true, searchable: false},
+                {data: 2, name: 'date'},
+                {data: 3, name: 'reason'},
+                {data: 4, name: 'actions', sortable: false, searchable: false}
             ]
         });
         table.columns().every(function () {
