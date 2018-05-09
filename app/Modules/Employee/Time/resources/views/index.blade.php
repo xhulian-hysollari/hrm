@@ -14,7 +14,7 @@
                     <th>{{trans('app.id')}}</th>
                     <th>{{trans('app.time.time_logs.time')}}</th>
                     <th>{{trans('app.time.time_logs.date')}}</th>
-                    <th>{{trans('app.time.time_logs.task_name')}}</th>
+                    <th>Reason</th>
                     <th></th>
                 </thead>
                 <tfoot>
@@ -26,7 +26,7 @@
                         <input type="date" placeholder="{{trans('app.time.time_logs.date')}}"/>
                     </th>
                     <th>
-                        <input type="text" placeholder="{{trans('app.time.time_logs.task_name')}}"/>
+                        Reason
                     </th>
                     <th></th>
                 </tfoot>
