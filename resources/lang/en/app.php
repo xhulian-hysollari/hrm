@@ -160,7 +160,7 @@ return [
     ],
     'employee' => [
         'training' => [
-            'main' => 'training'
+            'main' => 'Training'
         ]
     ],
     'pim' => [
