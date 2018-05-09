@@ -430,6 +430,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
             ->name('time_logs.datatable');
         Route::get('time-logs/monthly_datatable', '\App\Modules\Time\Http\Controllers\TimeLogsController@getMonthlyDatatable')
             ->name('time_logs.monthly_datatable');
+        Route::post('time-logs/upload', '\App\Modules\Time\Http\Controllers\TimeLogsController@uploadTimeLogs')
+            ->name('time_logs.upload');
         Route::resource('time-logs', '\App\Modules\Time\Http\Controllers\TimeLogsController', ['names' => [
             'index' => 'time_logs.index',
             'create' => 'time_logs.create',

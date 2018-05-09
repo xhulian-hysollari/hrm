@@ -9,6 +9,28 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="custom-panel">
+            <div class="custom-panel-heading">{{trans('app.pim.employees.documents.add_new')}}</div>
+            {!! Form::open(['route' => ['time.time_logs.upload'], 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
+            <div class="form-group">
+                {!! Form::label('attachment', trans('app.pim.employees.documents.attachment'), ['class' => 'col-sm-3']) !!}
+                <div class="col-sm-6">
+                    {!! Form::input('file', 'attachment', null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+            <hr>
+            <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <a href="{{route('pim.employees.documents.index', Route::input('employeeId'))}}" class="btn btn-default">{{trans('app.cancel')}}</a>
+                    {!! Form::submit(trans('app.submit'), ['class' => 'btn btn-primary']) !!}
+                </div>
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="custom-panel">
             <div class="custom-panel-heading">{{trans('app.time.time_logs.main')}}</div>
             <div class="form-group clearfix">
                 <form method="get" id="date_filter" action="">

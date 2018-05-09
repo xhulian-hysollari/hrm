@@ -3,14 +3,18 @@
 namespace App\Modules\Time\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Time\Models\TimeLog;
 use App\Modules\Time\Repositories\Interfaces\TimeLogRepositoryInterface as TimeLogRepository;
 use App\Modules\Time\Repositories\Interfaces\ProjectRepositoryInterface as ProjectRepository;
 use App\Modules\Pim\Repositories\Interfaces\EmployeeRepositoryInterface as EmployeeRepository;
 use App\Modules\Time\Http\Requests\TimeLogRequest;
 use App\Modules\Pim\Repositories\EmployeeSalaryRepository;
+use App\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Datatables;
+use Illuminate\Support\Facades\Input;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TimeLogsController extends Controller
 {
@@ -24,12 +28,12 @@ class TimeLogsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Modules\Time\Repositories\Interfaces\ProjectRepositoryInterface  $projectRepository
-     * @param  App\Modules\Pim\Repositories\Interfaces\EmployeeRepositoryInterface  $employeeRepository
+     * @param  \App\Modules\Time\Repositories\Interfaces\ProjectRepositoryInterface $projectRepository
+     * @param  App\Modules\Pim\Repositories\Interfaces\EmployeeRepositoryInterface $employeeRepository
      * @return \Illuminate\Http\Response
      */
     public function index(
-        ProjectRepository $projectRepository, 
+        ProjectRepository $projectRepository,
         EmployeeRepository $employeeRepository)
     {
         $projects = $projectRepository->getAll()->pluck('name', 'id');
@@ -39,34 +43,34 @@ class TimeLogsController extends Controller
 
     /**
      * Returns data for the resource list
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function getDatatable(Request $request)
     {
         $filter = [];
         $order = [];
-        if($request->date_from && $request->date_to) {
-            $start = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_from.' 00:00:00');
-            $end = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_to.' 23:59:59');
+        if ($request->date_from && $request->date_to) {
+            $start = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_from . ' 00:00:00');
+            $end = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_to . ' 23:59:59');
         } else {
             $start = Carbon::now()->subMonth();
             $end = Carbon::now();
-        }  
+        }
         $filter[] = [
-            'key' => 'date', 
-            'operator' => 'between', 
+            'key' => 'date',
+            'operator' => 'between',
             'value' => [$start, $end]
         ];
         return Datatables::of($this->timeLogRepository->getMonthlySummary(
-                $filter, 
-                ['user_id', 'time']
-            ))
-            ->editColumn('user_id', function($time_log) {
+            $filter,
+            ['user_id', 'time']
+        ))
+            ->editColumn('user_id', function ($time_log) {
                 $url = route('time.time_logs.employee_report', $time_log->user_id);
-                return '<a class="employeeLog" href="'.$url.'" data-url="'.$url.'">'.$time_log->employee->first_name.' '.$time_log->employee->last_name.'</a>';
+                return '<a class="employeeLog" href="' . $url . '" data-url="' . $url . '">' . $time_log->employee->first_name . ' ' . $time_log->employee->last_name . '</a>';
             })
-            ->editColumn('time', function($time_log) {
+            ->editColumn('time', function ($time_log) {
                 return format_hours($time_log->time);
             })
             ->make();
@@ -75,21 +79,21 @@ class TimeLogsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \App\Modules\Time\Repositories\Interfaces\ProjectRepositoryInterface  $projectRepository
-     * @param  App\Modules\Pim\Repositories\Interfaces\EmployeeRepositoryInterface  $employeeRepository
+     * @param  \App\Modules\Time\Repositories\Interfaces\ProjectRepositoryInterface $projectRepository
+     * @param  App\Modules\Pim\Repositories\Interfaces\EmployeeRepositoryInterface $employeeRepository
      * @return \Illuminate\Http\Response
      */
     public function create(ProjectRepository $projectRepository, EmployeeRepository $employeeRepository)
     {
         $projects = $projectRepository->getAll()->pluck('name', 'id');
         $employees = $employeeRepository->pluckName();
-        return view('time::time_logs.create', compact('projects','employees'));
+        return view('time::time_logs.create', compact('projects', 'employees'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Modules\Settings\Http\Requests\TimeLogRequest  $request
+     * @param  \App\Modules\Settings\Http\Requests\TimeLogRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(TimeLogRequest $request)
@@ -114,8 +118,8 @@ class TimeLogsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  integer  unique identifier for the resource
-     * @param  \App\Modules\Time\Repositories\Interfaces\ProjectRepositoryInterface  $projectRepository
-     * @param  App\Modules\Pim\Repositories\Interfaces\EmployeeRepositoryInterface  $employeeRepository
+     * @param  \App\Modules\Time\Repositories\Interfaces\ProjectRepositoryInterface $projectRepository
+     * @param  App\Modules\Pim\Repositories\Interfaces\EmployeeRepositoryInterface $employeeRepository
      * @return \Illuminate\Http\Response
      */
     public function edit($id, ProjectRepository $projectRepository, EmployeeRepository $employeeRepository)
@@ -131,7 +135,7 @@ class TimeLogsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  integer  unique identifier for the resource
-     * @param  \App\Modules\Settings\Http\Requests\TimeLogRequest  $request
+     * @param  \App\Modules\Settings\Http\Requests\TimeLogRequest $request
      * @return \Illuminate\Http\Response
      */
     public function update($id, TimeLogRequest $request)
@@ -145,7 +149,7 @@ class TimeLogsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  integer  unique identifier for the resource
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, Request $request)
@@ -158,25 +162,25 @@ class TimeLogsController extends Controller
     /**
      * Show the time log report for the given employee
      * @param  integer $userId
-     * @param  App\Modules\Pim\Repositories\Interfaces\EmployeeRepositoryInterface  $employeeRepository
+     * @param  App\Modules\Pim\Repositories\Interfaces\EmployeeRepositoryInterface $employeeRepository
      * @return \Illuminate\Http\Response
      */
     public function employeeReport(
-        $userId, 
+        $userId,
         Request $request,
         EmployeeRepository $employeeRepository,
         TimeLogRepository $timeLogRepository
     )
     {
-        if($request->date_start && $request->date_end) {
-            $start = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_start.' 00:00:00');
-            $end = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_end.' 23:59:59');
+        if ($request->date_start && $request->date_end) {
+            $start = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_start . ' 00:00:00');
+            $end = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_end . ' 23:59:59');
         } else {
             $start = Carbon::now()->subMonth();
             $end = Carbon::now();
-        }  
+        }
         $employee = $employeeRepository->getById($userId);
-        $breadcrumb = ['title' => $employee->first_name.' '.$employee->last_name, 'id' => $employee->id];
+        $breadcrumb = ['title' => $employee->first_name . ' ' . $employee->last_name, 'id' => $employee->id];
         $clientLogs = $timeLogRepository->getEmployeeReport($userId, $start, $end, 'client');
         $totalHours = 0;
         foreach ($clientLogs as $i => $clientLog) {
@@ -195,9 +199,9 @@ class TimeLogsController extends Controller
         EmployeeSalaryRepository $employeeSalaryRepository
     )
     {
-        if($request->date_start && $request->date_end) {
-            $start = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_start.' 00:00:00');
-            $end = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_end.' 23:59:59');
+        if ($request->date_start && $request->date_end) {
+            $start = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_start . ' 00:00:00');
+            $end = Carbon::createFromFormat('Y-m-d H:i:s', $request->date_end . ' 23:59:59');
         } else {
             $start = Carbon::now()->subMonth();
             $end = Carbon::now();
@@ -211,5 +215,51 @@ class TimeLogsController extends Controller
             ];
         }
         return view('time::time_logs.salary_report', compact('request', 'report', 'employees'));
+    }
+
+    public function uploadTimeLogs()
+    {
+        $file = Input::file('attachment');
+        $data = [];
+        $maxR = [];
+        Excel::selectSheetsByIndex(2)->load($file, function ($reader) use (&$data, &$maxR) {
+            $objExcel = $reader->getExcel();
+            $sheet = $objExcel->getSheet(2);
+            $maxR = $sheet->getHighestRow();
+            $data = $this->parseLogs($sheet, $maxR);
+        });
+        return redirect()->route('pim.employees.index');
+    }
+
+    protected function parseLogs($reader, $maxRow)
+    {
+        $startRow = 2;
+        $skills = [];
+        do {
+            if (
+            trim($reader->getCell(sprintf('D%s', $startRow))->getValue() !== "")
+            ) {
+                $date = $reader->getCell(sprintf('A%s', $startRow))->getValue();
+                $id = trim($reader->getCell(sprintf('D%s', $startRow))->getValue());
+                $user = User::where('matricola', $id)->first();
+                if (trim($reader->getCell(sprintf('E%s', $startRow))->getValue()) == "FERIE") {
+                    $time = 0;
+                    $reason = "FERIE";
+                } else {
+                    $time = trim($reader->getCell(sprintf('E%s', $startRow))->getValue());
+                    $reason = trim($reader->getCell(sprintf('H%s', $startRow))->getValue());
+                }
+                if ($user) {
+                    $parsedData = [
+                        'date' => date('Y-m-d', \PHPExcel_Shared_Date::ExcelToPHP($date)),
+                        'user_id' => $user->id,
+                        'time' => $time,
+                        'reason' => $reason
+                    ];
+                    TimeLog::create($parsedData);
+                }
+            }
+            $startRow += 1;
+        } while ($startRow <= $maxRow);
     }
 }
