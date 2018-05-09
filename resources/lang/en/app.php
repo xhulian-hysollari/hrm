@@ -158,6 +158,11 @@ return [
             'add_new' => 'Add New Currencies',
         ]
     ],
+    'employee' => [
+        'training' => [
+            'main' => 'training'
+        ]
+    ],
     'pim' => [
         'main' => 'PIM',
         'birthdays' => 'Birthdays',
