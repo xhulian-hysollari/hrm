@@ -16,6 +16,34 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function() {
     Route::get('/', '\App\Http\Controllers\Admin\HomeController@index')->name('home');
 
+    Route::get('visitor/datatable', '\App\Modules\Employee\Leaves\Http\Controllers\LeavesController@getDatatable')
+        ->name('visitor.datatable');
+
+    Route::resource('visitor', '\App\Modules\Visitor\Http\Controllers\VisitorController', ['names' => [
+        'index' => 'admin.visitor.index',
+        'create' => 'admin.visitor.create',
+        'show' => 'admin.visitor.show',
+        'edit' => 'admin.visitor.edit',
+        'store' => 'admin.visitor.store',
+        'update' => 'admin.visitor.update',
+        'destroy' => 'admin.visitor.destroy'
+    ]]);
+
+    Route::get('training/datatable', '\App\Modules\Employee\Training\Http\Controllers\TrainingController@getDatatable')
+        ->name('admin.training.datatable');
+    Route::get('training/download/{attachment}', '\App\Modules\Employee\Training\Http\Controllers\TrainingController@download')
+        ->name('admin.training.download');
+
+    Route::resource('training', '\App\Modules\Employee\Training\Http\Controllers\TrainingController', ['names' => [
+        'index' => 'admin.training.index',
+        'create' => 'admin.training.create',
+        'show' => 'admin.training.show',
+        'edit' => 'admin.training.edit',
+        'store' => 'admin.training.store',
+        'update' => 'admin.training.update',
+        'destroy' => 'admin.training.destroy'
+    ]]);
+
     Route::get('/storage/{path}', function($path) {
         return response()->file(storage_path().'/app/'.$path);
     })->name('storage')->where('path','(.*)')->middleware(['auth', 'admin']);
@@ -44,6 +72,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
             'store' => 'companies.store',
             'update' => 'companies.update',
             'destroy' => 'companies.destroy'
+        ]]);
+        Route::get('forcontact/datatable', '\App\Modules\Settings\Http\Controllers\ForcontactController@getDatatable')
+            ->name('forcontact.datatable');
+
+        Route::resource('forcontact', '\App\Modules\Settings\Http\Controllers\ForcontactController', ['names' => [
+            'index' => 'forcontact.index',
+            'create' => 'forcontact.create',
+            'show' => 'forcontact.show',
+            'edit' => 'forcontact.edit',
+            'store' => 'forcontact.store',
+            'update' => 'forcontact.update',
+            'destroy' => 'forcontact.destroy'
         ]]);
         Route::get('contract-types/datatable', '\App\Modules\Settings\Http\Controllers\ContractTypesController@getDatatable')
             ->name('contract_types.datatable');
@@ -424,7 +464,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
 Route::group(['prefix' => 'reception', 'middleware' => ['auth', 'reception']], function() {
     Route::get('/', '\App\Http\Controllers\Reception\HomeController@index')
         ->name('reception.home');
-    Route::get('visitor/datatable', '\App\Modules\Employee\Leaves\Http\Controllers\LeavesController@getDatatable')
+    Route::get('visitor/datatable', '\App\Modules\Visitor\Http\Controllers\VisitorController@getDatatable')
         ->name('visitor.datatable');
 
     Route::resource('visitor', '\App\Modules\Visitor\Http\Controllers\VisitorController', ['names' => [

@@ -6,6 +6,7 @@ use App\Modules\Visitor\Http\Requests\VisitorRequest;
 use App\Modules\Visitor\Repositories\Interfaces\VisitorRepositoryInterface as VisitorRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Datatables;
 
 class VisitorController extends Controller
 {
@@ -38,10 +39,10 @@ class VisitorController extends Controller
     public function getDatatable()
     {
         return Datatables::of($this->visitorRepository->getQry([], ['id', 'name']))
-            ->addColumn('actions', function($client){
+            ->addColumn('actions', function($visitor){
                 return view('includes._datatable_actions', [
-                    'deleteUrl' => route('visitor.destroy', $client->id),
-                    'editUrl' => route('visitor.edit', $client->id)
+                    'deleteUrl' => route('visitor.destroy', $visitor->id),
+                    'editUrl' => route('visitor.edit', $visitor->id)
                 ]);
             })
             ->make();

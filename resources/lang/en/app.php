@@ -14,6 +14,7 @@ return [
     */
 
     'add_record' => 'Add record',
+    'go_back' => 'Go back',
     'id' => 'ID',
     'submit' => 'Submit',
     'cancel' => 'Cancel',

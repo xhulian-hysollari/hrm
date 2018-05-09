@@ -16,7 +16,7 @@ class RedirectIfNotReception
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user()->role != User::USER_ROLE_RECEPTION) {
+        if ($request->user()->role != User::USER_ROLE_RECEPTION && $request->user()->role != User::USER_ROLE_ADMIN) {
             return redirect()->back();
         }
 

@@ -24,6 +24,15 @@
                         @endif
                     </a>
                 </li>
+                @if(\Illuminate\Support\Facades\Auth::user()->role === 1)
+                <li class="{{ $current == 'visitor' ? 'active' : ''}}">
+                    <a href="{{route('pim.index')}}"> {{trans('app.go_back')}}
+                        @if($current == 'visitor')
+                            <span class="sr-only">({{trans('app.current')}})</span>
+                        @endif
+                    </a>
+                </li>
+                @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

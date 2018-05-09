@@ -5,6 +5,7 @@ namespace App\Modules\Pim\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Modules\Pim\Http\Requests\EmployeeRequest;
 use App\Modules\Pim\Repositories\Interfaces\EmployeeRepositoryInterface as EmployeeRepository;
+use App\Modules\Settings\Models\Forcontact;
 use App\User;
 use Datatables;
 use Maatwebsite\Excel\Facades\Excel;
@@ -90,7 +91,9 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        return view('pim::employees.create');
+        $structure = Forcontact::all()->pluck('company_name', 'id');
+        $users = User::all()->pluck('first_name', 'id');
+        return view('pim::employees.create', compact('structure', 'users'));
     }
 
     /**
@@ -155,11 +158,13 @@ class EmployeesController extends Controller
      */
     public function edit($id)
     {
+        $structure = Forcontact::all()->pluck('company_name', 'id');
+        $users = User::all()->pluck('first_name', 'id');
         $employee = $this->employeeRepository->getById($id);
         if ($employee->role == $this->employeeRepository->model::USER_ROLE_CANDIDATE) {
             return redirect()->route('pim.candidates.edit', $id);
         }
-        return view('pim::employees.edit', ['employee' => $employee, 'breadcrumb' => ['title' => $employee->first_name . ' ' . $employee->last_name, 'id' => $employee->id]]);
+        return view('pim::employees.edit', ['employee' => $employee, 'structure' => $structure, 'users' => $users, 'breadcrumb' => ['title' => $employee->first_name . ' ' . $employee->last_name, 'id' => $employee->id]]);
     }
 
     /**

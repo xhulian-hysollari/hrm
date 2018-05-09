@@ -19,19 +19,19 @@
 <div class="form-group">
     {!! Form::label('visit_date', trans('app.visitor.visit_date').':', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
-        {!! Form::text('visit_date', null, ['class' => 'form-control']) !!}
+        {!! Form::input('datetime-local', 'visit_date', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 <div class="form-group">
     {!! Form::label('check_in', trans('app.visitor.check_in').':', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
-        {!! Form::text('check_in', null, ['class' => 'form-control']) !!}
+        {!! Form::input('datetime-local', 'check_in', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 <div class="form-group">
     {!! Form::label('check_out', trans('app.visitor.check_out').':', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
-        {!! Form::text('check_out', null, ['class' => 'form-control']) !!}
+        {!! Form::input('datetime-local', 'check_out', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 <div class="form-group">

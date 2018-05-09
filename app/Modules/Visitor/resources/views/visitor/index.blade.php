@@ -9,21 +9,21 @@
     <div class="col-sm-12">
         <div class="custom-panel">
             <div class="custom-panel-heading">{{trans('app.visitor.main')}}</div>
-            <table class="table table-bordered table-hover" id="clientsTable">
+            <table class="table table-bordered table-hover" id="visitorsTable">
                 <thead>
                     <th>{{trans('app.id')}}</th>
                     <th>{{trans('app.visitor.name')}}</th>
                     <th></th>
                 </thead>
-                <tfoot>
-                    <th>
-                        <input type="text" placeholder="{{trans('app.id')}}"/>
-                    </th>
-                    <th>
-                        <input type="text" placeholder="{{trans('app.visitor.name')}}"/>
-                    </th>
-                    <th></th>
-                </tfoot>
+                {{--<tfoot>--}}
+                    {{--<th>--}}
+                        {{--<input type="text" placeholder="{{trans('app.id')}}"/>--}}
+                    {{--</th>--}}
+                    {{--<th>--}}
+                        {{--<input type="text" placeholder="{{trans('app.visitor.name')}}"/>--}}
+                    {{--</th>--}}
+                    {{--<th></th>--}}
+                {{--</tfoot>--}}
             </table>
         </div>
     </div>
@@ -36,7 +36,8 @@
 <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function(){
-        var table = $('#clientsTable').DataTable({
+        console.log('{{ route("visitor.datatable")}}')
+        var table = $('#visitorsTable').DataTable({
             processing: true,
             serverSide: true,
             ajax: '{{ route("visitor.datatable")}}',

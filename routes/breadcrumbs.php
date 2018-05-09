@@ -104,6 +104,42 @@ Breadcrumbs::register('settings.companies.show', function($breadcrumbs, $breadcr
  */
 
 /**
+ * Forcontact. breadcrumbs start here
+ */
+
+// Home > Settings > Forcontact.
+Breadcrumbs::register('settings.forcontact.index', function($breadcrumbs)
+{
+    $breadcrumbs->parent('settings.index');
+    $breadcrumbs->push(trans('app.settings.forcontact.main'), route('settings.forcontact.index'));
+});
+
+// Home > Settings > Forcontact. > Create
+Breadcrumbs::register('settings.forcontact.create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('settings.forcontact.index');
+    $breadcrumbs->push(trans('app.add_record'), route('settings.forcontact.create'));
+});
+
+// Home > Settings > Forcontact. > Edit
+Breadcrumbs::register('settings.forcontact.edit', function($breadcrumbs, $breadcrumb)
+{
+    $breadcrumbs->parent('settings.forcontact.index');
+    $breadcrumbs->push(trans('app.edit').': '.$breadcrumb['title'], route('settings.forcontact.edit', $breadcrumb['id']));
+});
+
+// Home > Settings > Forcontact. > Details
+Breadcrumbs::register('settings.forcontact.show', function($breadcrumbs, $breadcrumb)
+{
+    $breadcrumbs->parent('settings.forcontact.index');
+    $breadcrumbs->push($breadcrumb['title'], route('settings.forcontact.show', $breadcrumb['id']));
+});
+
+/**
+ * Forcontact. breadcrumbs end here
+ */
+
+/**
  * Contract types breadcrumbs start here
  */
 
@@ -954,6 +990,28 @@ Breadcrumbs::register('visitor.index', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
     $breadcrumbs->push(trans('app.visitor.main'), route('visitor.index'));
+});
+Breadcrumbs::register('admin.visitor.index', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('app.visitor.main'), route('admin.visitor.index'));
+});
+
+
+Breadcrumbs::register('admin.training.index', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('app.training.main'), route('admin.training.index'));
+});
+Breadcrumbs::register('admin.training.create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('app.add_record'), route('admin.training.create'));
+});
+Breadcrumbs::register('admin.training.edit', function($breadcrumbs, $breadcrumb)
+{
+    $breadcrumbs->parent('admin.training.index');
+    $breadcrumbs->push(trans('app.edit').': '.$breadcrumb['title'], route('admin.training.edit', $breadcrumb['id']));
 });
 
 // Home > Visit > Create

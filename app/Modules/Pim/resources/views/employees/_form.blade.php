@@ -55,7 +55,13 @@
 <div class="form-group">
     {!! Form::label('structure', 'Structure:', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
-        {!! Form::text('structure', null, ['class' => 'form-control']) !!}
+        {!! Form::select('structure', $structure, null, ['class' => 'form-control projects']) !!}
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('supervisor', 'Structure:', ['class' => 'col-sm-3']) !!}
+    <div class="col-sm-6">
+        {!! Form::select('supervisor', $users, null, ['class' => 'form-control projects']) !!}
     </div>
 </div>
 <div class="form-group">

@@ -11,6 +11,11 @@
             <h2>{{trans('app.pim.candidates.main')}}</h2>
         </a>
     </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a class="nav-box" href="{{route('admin.visitor.index')}}">
+            <h2>{{trans('app.visitor.main')}}</h2>
+        </a>
+    </div>
 </div>
 @endsection
 @section('additionalCSS')

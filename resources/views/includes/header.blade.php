@@ -51,6 +51,13 @@
             @endif
           </a>
         </li>
+        <li class="{{ $current == 'training' ? 'active' : ''}}">
+          <a href="{{route('admin.training.index')}}">{{trans('app.training.main')}}
+            @if($current == 'training')
+              <span class="sr-only">({{trans('app.current')}})</span>
+            @endif
+          </a>
+        </li>
         <li class="{{ $current == 'discipline' ? 'active' : ''}}">
           <a href="{{route('discipline.index')}}">{{trans('app.discipline.main')}}
             @if($current == 'discipline') 

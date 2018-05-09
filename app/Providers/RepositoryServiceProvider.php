@@ -18,6 +18,7 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $bindings = [
             Settings\Repositories\CompanyRepository::class => [Settings\Repositories\Interfaces\CompanyRepositoryInterface::class],
+            Settings\Repositories\ForcontactRepository::class => [Settings\Repositories\Interfaces\ForcontactRepositoryInterface::class],
             Settings\Repositories\ContractTypeRepository::class => [Settings\Repositories\Interfaces\ContractTypeRepositoryInterface::class],
             Settings\Repositories\DocumentTemplateRepository::class => [Settings\Repositories\Interfaces\DocumentTemplateRepositoryInterface::class],
             Settings\Repositories\JobPositionRepository::class => [Settings\Repositories\Interfaces\JobPositionRepositoryInterface::class],
