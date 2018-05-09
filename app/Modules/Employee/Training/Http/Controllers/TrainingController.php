@@ -49,7 +49,7 @@ class TrainingController extends Controller
     }
     public function getEmployeeDatatable()
     {
-        return Datatables::of(Training::all())
+        return Datatables::of(Training::join('user_trainings', 'trainings.id', '=', 'user_trainings.training_id')->where('user_trainings.user_id', Auth::id())->get())
             ->addColumn('actions', function ($training) {
                 return view('includes._datatable_actions', [
 //                    'deleteUrl' => route('admin.training.destroy', $training->id),

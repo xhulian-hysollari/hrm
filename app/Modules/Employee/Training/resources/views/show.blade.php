@@ -52,7 +52,7 @@
                     {data: 3, name: 'location'},
                     {data: 4, name: 'training_date', sortable: true, searchable: true},
                     {data: 5, name: 'notes'},
-                    {data: 10, name: 'actions', sortable: false, searchable:false}
+                    {data: 12, name: 'actions', sortable: false, searchable:false}
                 ]
             });
             table.columns().every(function () {
