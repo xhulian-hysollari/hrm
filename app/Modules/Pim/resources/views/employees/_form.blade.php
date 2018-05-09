@@ -59,7 +59,7 @@
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('supervisor', 'Structure:', ['class' => 'col-sm-3']) !!}
+    {!! Form::label('supervisor', 'Supervisor:', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
         {!! Form::select('supervisor', $users, null, ['class' => 'form-control projects']) !!}
     </div>
