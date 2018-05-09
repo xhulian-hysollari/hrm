@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main_employee')
 @section('content')
     <div class="row">
         <div class="col-sm-12">
@@ -11,7 +11,6 @@
                 <div class="custom-panel-heading">{{trans('app.time.time_logs.main')}}</div>
                 <table class="table table-bordered table-hover" id="privateTraining">
                     <thead>
-                    <th>{{trans('app.id')}}</th>
                     <th>{{trans('app.training.name')}}</th>
                     <th>{{trans('app.training.location')}}</th>
                     <th>{{trans('app.training.notes')}}</th>
@@ -19,9 +18,6 @@
                     <th></th>
                     </thead>
                     <tfoot>
-                    <th>
-                        <input type="text" placeholder="{{trans('app.id')}}"/>
-                    </th>
                     <th>
                         <input type="text" placeholder="{{trans('app.training.name')}}"/>
                     </th>
@@ -32,7 +28,6 @@
                     <th>
                         <input type="date" placeholder="{{trans('app.time.time_logs.date')}}"/>
                     </th>
-                    <th></th>
                     <th></th>
                     </tfoot>
                 </table>
@@ -47,16 +42,17 @@
     <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function(){
+            console.log('activated');
             var table = $('#privateTraining').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route("admin.training.datatable")}}',
+                ajax: '{{ route("employee.training.datatable")}}',
                 columns: [
-                    {data: 0, name: 'id'},
                     {data: 1, name: 'name'},
-                    {data: 2, name: 'location'},
-                    {data: 3, name: 'notes'},
-                    {data: 4, name: 'training_date', sortable: true, searchable: true}
+                    {data: 3, name: 'location'},
+                    {data: 4, name: 'training_date', sortable: true, searchable: true},
+                    {data: 5, name: 'notes'},
+                    {data: 10, name: 'actions', sortable: false, searchable:false}
                 ]
             });
             table.columns().every(function () {

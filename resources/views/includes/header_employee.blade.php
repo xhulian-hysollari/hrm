@@ -42,6 +42,13 @@
               @endif 
           </a>
         </li>
+        <li class="{{ $current == 'employee.training' ? 'active' : ''}}">
+          <a href="{{route('employee.training.index')}}"> {{trans('app.employee.training.main')}}
+              @if($current == 'employee.training')
+                <span class="sr-only">({{trans('app.current')}})</span>
+              @endif
+          </a>
+        </li>
         <li class="{{ $current == 'employee.documents' ? 'active' : ''}}">
           <a href="{{route('employee.documents.index')}}"> {{trans('app.pim.employees.documents.main')}}
               @if($current == 'employee.documents')

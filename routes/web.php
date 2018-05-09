@@ -13,7 +13,7 @@ Route::get('/', function () {
     return redirect()->to('/login');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function() {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', '\App\Http\Controllers\Admin\HomeController@index')->name('home');
 
     Route::get('visitor/datatable', '\App\Modules\Employee\Leaves\Http\Controllers\LeavesController@getDatatable')
@@ -44,12 +44,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         'destroy' => 'admin.training.destroy'
     ]]);
 
-    Route::get('/storage/{path}', function($path) {
-        return response()->file(storage_path().'/app/'.$path);
-    })->name('storage')->where('path','(.*)')->middleware(['auth', 'admin']);
-    Route::resource('profile', '\App\Http\Controllers\Admin\ProfileController', 
+    Route::get('/storage/{path}', function ($path) {
+        return response()->file(storage_path() . '/app/' . $path);
+    })->name('storage')->where('path', '(.*)')->middleware(['auth', 'admin']);
+    Route::resource('profile', '\App\Http\Controllers\Admin\ProfileController',
         [
-            'middleware' => ['auth', 'admin'], 
+            'middleware' => ['auth', 'admin'],
             'only' => ['index', 'store'],
             'names' => [
                 'index' => 'profile.index',
@@ -58,12 +58,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         ]
     );
     Route::group(['prefix' => 'settings', 'as' => 'settings.', 'middleware' => ['auth', 'admin']], function () {
-        Route::get('/', function() {
+        Route::get('/', function () {
             return view('settings::index');
         })->name('index');
         Route::get('companies/datatable', '\App\Modules\Settings\Http\Controllers\CompaniesController@getDatatable')
             ->name('companies.datatable');
-        
+
         Route::resource('companies', '\App\Modules\Settings\Http\Controllers\CompaniesController', ['names' => [
             'index' => 'companies.index',
             'create' => 'companies.create',
@@ -87,7 +87,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         ]]);
         Route::get('contract-types/datatable', '\App\Modules\Settings\Http\Controllers\ContractTypesController@getDatatable')
             ->name('contract_types.datatable');
-        
+
         Route::resource('contract-types', '\App\Modules\Settings\Http\Controllers\ContractTypesController', ['names' => [
             'index' => 'contract_types.index',
             'create' => 'contract_types.create',
@@ -99,7 +99,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         ]]);
         Route::get('document-templates/datatable', '\App\Modules\Settings\Http\Controllers\DocumentTemplatesController@getDatatable')
             ->name('document_templates.datatable');
-        
+
         Route::resource('document-templates', '\App\Modules\Settings\Http\Controllers\DocumentTemplatesController', ['names' => [
             'index' => 'document_templates.index',
             'create' => 'document_templates.create',
@@ -111,7 +111,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         ]]);
         Route::get('education-institutions/datatable', '\App\Modules\Settings\Http\Controllers\EducationInstitutionsController@getDatatable')
             ->name('education_institutions.datatable');
-        
+
         Route::resource('education-institutions', '\App\Modules\Settings\Http\Controllers\EducationInstitutionsController', ['names' => [
             'index' => 'education_institutions.index',
             'create' => 'education_institutions.create',
@@ -123,7 +123,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         ]]);
         Route::get('job-positions/datatable', '\App\Modules\Settings\Http\Controllers\JobPositionsController@getDatatable')
             ->name('job_positions.datatable');
-        
+
         Route::resource('job-positions', '\App\Modules\Settings\Http\Controllers\JobPositionsController', ['names' => [
             'index' => 'job_positions.index',
             'create' => 'job_positions.create',
@@ -146,7 +146,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         ]]);
         Route::get('salary-components/datatable', '\App\Modules\Settings\Http\Controllers\SalaryComponentsController@getDatatable')
             ->name('salary_components.datatable');
-        
+
         Route::resource('salary-components', '\App\Modules\Settings\Http\Controllers\SalaryComponentsController', ['names' => [
             'index' => 'salary_components.index',
             'create' => 'salary_components.create',
@@ -169,11 +169,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
             'destroy' => 'currency.destroy'
         ]]);
     });
-    Route::group(['prefix' => 'pim', 'as' => 'pim.', 'middleware' => ['auth', 'admin']], function() {
-        Route::get('/', function() {
+    Route::group(['prefix' => 'pim', 'as' => 'pim.', 'middleware' => ['auth', 'admin']], function () {
+        Route::get('/', function () {
             return view('pim::index');
         })->name('index');
-        
+
         Route::get('employees/birthdays', '\App\Modules\Pim\Http\Controllers\EmployeesController@birthdays')->name('employees.birthdays');
         Route::get('employees/datatable', '\App\Modules\Pim\Http\Controllers\EmployeesController@getDatatable')
             ->name('employees.datatable');
@@ -208,7 +208,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
             'update' => 'candidates.update',
             'destroy' => 'candidates.destroy'
         ]]);
-        Route::group(['prefix' => 'profile/{employeeId}', 'as' => 'employees.'], function($employeeId) {
+        Route::group(['prefix' => 'profile/{employeeId}', 'as' => 'employees.'], function ($employeeId) {
             Route::resource('social-media', '\App\Modules\Pim\Http\Controllers\EmployeeSocialMediaController', ['names' => [
                 'index' => 'social_media.index',
                 'create' => 'social_media.create',
@@ -217,14 +217,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
                 'store' => 'social_media.store',
                 'update' => 'social_media.update',
                 'destroy' => 'social_media.destroy'
-            ]]);  
+            ]]);
             Route::get('documents/datatable', '\App\Modules\Pim\Http\Controllers\EmployeeDocumentsController@getDatatable')
-            ->name('documents.datatable');
+                ->name('documents.datatable');
             Route::get('documents/generate', '\App\Modules\Pim\Http\Controllers\EmployeeDocumentsController@generate')
-            ->name('documents.generate');
+                ->name('documents.generate');
             Route::post('documents/template-content', '\App\Modules\Pim\Http\Controllers\EmployeeDocumentsController@generateTemplateContent')
-            ->name('documents.template_content');
-            
+                ->name('documents.template_content');
+
             Route::resource('documents', '\App\Modules\Pim\Http\Controllers\EmployeeDocumentsController', ['names' => [
                 'index' => 'documents.index',
                 'create' => 'documents.create',
@@ -233,7 +233,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
                 'store' => 'documents.store',
                 'update' => 'documents.update',
                 'destroy' => 'documents.destroy'
-            ]]);  
+            ]]);
             Route::resource('contact-details', '\App\Modules\Pim\Http\Controllers\EmployeeContactDetailsController', [
                 'only' => [
                     'index',
@@ -245,9 +245,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
                     'store' => 'contact_details.store',
                     'update' => 'contact_details.update'
                 ]
-            ]);  
+            ]);
             Route::get('salaries/datatable', '\App\Modules\Pim\Http\Controllers\EmployeeSalaryController@getDatatable')
-            ->name('salaries.datatable');
+                ->name('salaries.datatable');
             Route::resource('salaries', '\App\Modules\Pim\Http\Controllers\EmployeeSalaryController', ['names' => [
                 'index' => 'salaries.index',
                 'create' => 'salaries.create',
@@ -256,11 +256,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
                 'store' => 'salaries.store',
                 'update' => 'salaries.update',
                 'destroy' => 'salaries.destroy'
-            ]]);  
+            ]]);
             Route::post('salaries/config-salary', '\App\Modules\Pim\Http\Controllers\EmployeeSalaryController@configSalary')
-            ->name('salaries.config_salary');
-            Route::group(['prefix' => 'qualifications', 'as' => 'qualifications.'], function($employeeId) {
-                
+                ->name('salaries.config_salary');
+            Route::group(['prefix' => 'qualifications', 'as' => 'qualifications.'], function ($employeeId) {
+
                 Route::get('/', '\App\Modules\Pim\Http\Controllers\EmployeeQualificationsController@index')->name('index');
                 Route::get('work-experience/datatable', '\App\Modules\Pim\Http\Controllers\EmployeeWorkExperienceController@getDatatable')
                     ->name('work_experience.datatable');
@@ -276,13 +276,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
                         'update' => 'work_experience.update',
                         'destroy' => 'work_experience.destroy'
                     ]
-                ]); 
+                ]);
                 Route::resource('skills', '\App\Modules\Pim\Http\Controllers\EmployeeSkillsController', [
                     'only' => ['store'],
                     'names' => [
                         'store' => 'skills.store'
                     ]
-                ]); 
+                ]);
                 Route::get('education/datatable', '\App\Modules\Pim\Http\Controllers\EmployeeEducationController@getDatatable')
                     ->name('education.datatable');
                 Route::resource('education', '\App\Modules\Pim\Http\Controllers\EmployeeEducationController', [
@@ -297,7 +297,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
                         'update' => 'education.update',
                         'destroy' => 'education.destroy'
                     ]
-                ]); 
+                ]);
                 Route::get('languages/datatable', '\App\Modules\Pim\Http\Controllers\EmployeeLanguagesController@getDatatable')
                     ->name('languages.datatable');
                 Route::resource('languages', '\App\Modules\Pim\Http\Controllers\EmployeeLanguagesController', [
@@ -312,7 +312,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
                         'update' => 'languages.update',
                         'destroy' => 'languages.destroy'
                     ]
-                ]); 
+                ]);
             });
             Route::resource('preferences', '\App\Modules\Pim\Http\Controllers\EmployeePreferencesController', ['names' => [
                 'index' => 'preferences.index',
@@ -322,11 +322,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
                 'store' => 'preferences.store',
                 'update' => 'preferences.update',
                 'destroy' => 'preferences.destroy'
-            ]]);  
-        });  
+            ]]);
+        });
     });
-    Route::group(['prefix' => 'leave', 'as' => 'leave.', 'middleware' => ['auth', 'admin']], function() {
-        Route::get('/', function() {
+    Route::group(['prefix' => 'leave', 'as' => 'leave.', 'middleware' => ['auth', 'admin']], function () {
+        Route::get('/', function () {
             return view('leave::index');
         })->name('index');
         Route::get('leave-types/datatable', '\App\Modules\Leave\Http\Controllers\LeaveTypeController@getDatatable')
@@ -368,8 +368,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         Route::get('calendar', '\App\Modules\Leave\Http\Controllers\CalendarController@index')->name('calendar.index');
         Route::get('render-calendar', '\App\Modules\Leave\Http\Controllers\CalendarController@renderCalendar')->name('calendar.render');
     });
-    Route::group(['prefix' => 'recruitment', 'as' => 'recruitment.', 'middleware' => ['auth', 'admin']], function() {
-        Route::get('/', function() {
+    Route::group(['prefix' => 'recruitment', 'as' => 'recruitment.', 'middleware' => ['auth', 'admin']], function () {
+        Route::get('/', function () {
             return view('recruitment::index');
         })->name('index');
         Route::get('reports/datatable', '\App\Modules\Recruitment\Http\Controllers\ReportsController@getDatatable')
@@ -384,8 +384,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
             'destroy' => 'reports.destroy'
         ]]);
     });
-    Route::group(['prefix' => 'discipline', 'as' => 'discipline.', 'middleware' => ['auth', 'admin']], function() {
-        Route::get('/', function() {
+    Route::group(['prefix' => 'discipline', 'as' => 'discipline.', 'middleware' => ['auth', 'admin']], function () {
+        Route::get('/', function () {
             return view('discipline::index');
         })->name('index');
         Route::get('disciplinary-cases/datatable', '\App\Modules\Discipline\Http\Controllers\DisciplinaryCasesController@getDatatable')
@@ -400,8 +400,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
             'destroy' => 'disciplinary_cases.destroy'
         ]]);
     });
-    Route::group(['prefix' => 'time', 'as' => 'time.', 'middleware' => ['auth', 'admin']], function() {
-        Route::get('/', function() {
+    Route::group(['prefix' => 'time', 'as' => 'time.', 'middleware' => ['auth', 'admin']], function () {
+        Route::get('/', function () {
             return view('time::index');
         })->name('index');
         Route::get('clients/datatable', '\App\Modules\Time\Http\Controllers\ClientsController@getDatatable')
@@ -443,8 +443,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         Route::get('salary-report', '\App\Modules\Time\Http\Controllers\TimeLogsController@salaryReport')->name('time_logs.salary_report');
     });
 
-    Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['auth', 'admin']], function() {
-         Route::get('/', function() {
+    Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => ['auth', 'admin']], function () {
+        Route::get('/', function () {
             return view('dashboard::index');
         })->name('index');
         Route::get('documents/datatable', '\App\Modules\Dashboard\Http\Controllers\DashboardDocumentsController@getDatatable')
@@ -458,10 +458,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
             'store' => 'documents.store',
             'update' => 'documents.update',
             'destroy' => 'documents.destroy'
-        ]]);      
+        ]]);
     });
 });
-Route::group(['prefix' => 'reception', 'middleware' => ['auth', 'reception']], function() {
+Route::group(['prefix' => 'reception', 'middleware' => ['auth', 'reception']], function () {
     Route::get('/', '\App\Http\Controllers\Reception\HomeController@index')
         ->name('reception.home');
     Route::get('visitor/datatable', '\App\Modules\Visitor\Http\Controllers\VisitorController@getDatatable')
@@ -477,23 +477,29 @@ Route::group(['prefix' => 'reception', 'middleware' => ['auth', 'reception']], f
         'destroy' => 'visitor.destroy'
     ]]);
 });
-Route::group(['prefix' => 'employee', 'as' => 'employee.', 'middleware' => ['auth', 'employee']], function() {
+Route::group(['prefix' => 'employee', 'as' => 'employee.', 'middleware' => ['auth', 'employee']], function () {
     Route::get('/', '\App\Http\Controllers\Employee\HomeController@index')
-    ->name('home');
+        ->name('home');
+    Route::get('training/datatable', '\App\Modules\Employee\Training\Http\Controllers\TrainingController@getEmployeeDatatable')
+        ->name('training.datatable');
+    Route::get('training/download/{attachment}', '\App\Modules\Employee\Training\Http\Controllers\TrainingController@download')
+        ->name('training.download');
+
+    Route::get('training', '\App\Modules\Employee\Training\Http\Controllers\TrainingController@employeeIndex')->name('training.index');
 
     Route::get('documents/datatable', '\App\Modules\Employee\Documents\Http\Controllers\DocumentsController@getDatatable')
-            ->name('documents.datatable');
+        ->name('documents.datatable');
     Route::post('documents/download/{user_id}/{document_id}', '\App\Modules\Employee\Documents\Http\Controllers\DocumentsController@downloadDocument')
-            ->name('documents.download');
+        ->name('documents.download');
     Route::resource('documents', '\App\Modules\Employee\Documents\Http\Controllers\DocumentsController', ['names' => [
-            'index' => 'documents.index',
-            'show' => 'documents.show'
-        ]]);
+        'index' => 'documents.index',
+        'show' => 'documents.show'
+    ]]);
 
     Route::get('salary/datatable', '\App\Modules\Employee\Salary\Http\Controllers\SalaryController@getDatatable')
-            ->name('salary.datatable');
+        ->name('salary.datatable');
     Route::post('salary/download/{user_id}/{salary_id}', '\App\Modules\Employee\Salary\Http\Controllers\SalaryController@downloadReport')
-            ->name('salary.download');
+        ->name('salary.download');
     Route::resource('salary', '\App\Modules\Employee\Salary\Http\Controllers\SalaryController', ['names' => [
         'index' => 'salary.index',
         'create' => 'salary.create',
@@ -503,27 +509,27 @@ Route::group(['prefix' => 'employee', 'as' => 'employee.', 'middleware' => ['aut
     Route::get('dashboard-documents/datatable', '\App\Modules\Employee\Dashboard\Http\Controllers\EmployeeDashboardDocumentsController@getDatatable')->name('dashboard_documents.datatable');
     Route::post('dashboard-documents/download/{document_id}', '\App\Modules\Employee\Dashboard\Http\Controllers\EmployeeDashboardDocumentsController@download')->name('dashboard_documents.download');
     Route::resource('dashboard-documents', '\App\Modules\Employee\Dashboard\Http\Controllers\EmployeeDashboardDocumentsController', ['names' => [
-            'index' => 'dashboard_documents.index',
-            'show' => 'dashboard_documents.show'
-    ]]); 
+        'index' => 'dashboard_documents.index',
+        'show' => 'dashboard_documents.show'
+    ]]);
 
     Route::get('time/datatable', '\App\Modules\Employee\Time\Http\Controllers\TimeController@getDatatable')
-            ->name('time.datatable');
-    
+        ->name('time.datatable');
+
     Route::get('time/report', '\App\Modules\Employee\Time\Http\Controllers\TimeController@report')->name('time.report');
-    
+
     Route::resource('time', '\App\Modules\Employee\Time\Http\Controllers\TimeController', ['names' => [
-            'index' => 'time.index',
-            'create' => 'time.create',
-            'show' => 'time.show',
-            'edit' => 'time.edit',
-            'store' => 'time.store',
-            'update' => 'time.update',
-            'destroy' => 'time.destroy'
-        ]]);
+        'index' => 'time.index',
+        'create' => 'time.create',
+        'show' => 'time.show',
+        'edit' => 'time.edit',
+        'store' => 'time.store',
+        'update' => 'time.update',
+        'destroy' => 'time.destroy'
+    ]]);
 
     Route::get('leaves/datatable', '\App\Modules\Employee\Leaves\Http\Controllers\LeavesController@getDatatable')
-            ->name('leaves.datatable');
+        ->name('leaves.datatable');
 
     Route::resource('leaves', '\App\Modules\Employee\Leaves\Http\Controllers\LeavesController', ['names' => [
         'index' => 'leaves.index',

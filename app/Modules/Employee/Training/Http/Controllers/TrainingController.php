@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Modules\Pim\Repositories\Interfaces\EmployeeRepositoryInterface as EmployeeRepository;
 use Datatables;
 use App\Modules\Dashboard\Repositories\Interfaces\DashboardDocumentsRepositoryInterface as DashboardDocumentsRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -24,6 +25,10 @@ class TrainingController extends Controller
         $users = $employeeRepository->pluckName();
         return view('employee.training::index', compact('users'));
     }
+    public function employeeIndex()
+    {
+        return view('employee.training::show');
+    }
 
     /**
      * Returns data for the resource list
@@ -38,6 +43,18 @@ class TrainingController extends Controller
                     'deleteUrl' => route('admin.training.destroy', $training->id),
                     'editUrl' => route('admin.training.edit', $training->id),
                     'downloadUrl' => route('admin.training.download', $training->attachment)
+                ]);
+            })
+            ->make();
+    }
+    public function getEmployeeDatatable()
+    {
+        return Datatables::of(Training::all())
+            ->addColumn('actions', function ($training) {
+                return view('includes._datatable_actions', [
+//                    'deleteUrl' => route('admin.training.destroy', $training->id),
+//                    'editUrl' => route('admin.training.edit', $training->id),
+                    'downloadUrl' => route('employee.training.download', $training->attachment)
                 ]);
             })
             ->make();

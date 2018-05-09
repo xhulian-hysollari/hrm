@@ -1003,6 +1003,11 @@ Breadcrumbs::register('admin.training.index', function($breadcrumbs)
     $breadcrumbs->parent('home');
     $breadcrumbs->push(trans('app.training.main'), route('admin.training.index'));
 });
+Breadcrumbs::register('employee.training.index', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('app.training.main'), route('employee.training.index'));
+});
 Breadcrumbs::register('admin.training.create', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
