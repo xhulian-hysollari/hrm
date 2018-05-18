@@ -1,9 +1,38 @@
 <meta charset="UTF-8">
 <title>Document</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="{{asset('vendors/css/flag-icon.min.css')}}" rel="stylesheet">
+<link href="{{asset('vendors/css/font-awesome.min.css')}}" rel="stylesheet">
+<link href="{{asset('vendors/css/simple-line-icons.min.css')}}" rel="stylesheet">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Main styles for this application -->
+<link href="{{asset('css/style.css')}}" rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}"/>  
+<!-- Styles required by this views -->
+<link href="{{asset('vendors/css/daterangepicker.min.css')}}" rel="stylesheet">
+<link href="{{asset('vendors/css/gauge.min.css')}}" rel="stylesheet">
+<link href="{{asset('vendors/css/toastr.min.css')}}" rel="stylesheet">
+
+<style>
+    .container{
+        margin-top: 20px;
+    }
+    .card.text-white.bg-primary.text-center a:hover {
+        color: white;
+    }
+
+    .card.text-white.bg-primary.text-center a {
+        color: white !important;
+    }
+    .card-body, .card-block {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 140px;
+    }
+
+    blockquote {
+        margin: 0;
+    }
+</style>
