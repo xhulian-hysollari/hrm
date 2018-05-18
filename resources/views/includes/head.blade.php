@@ -23,7 +23,7 @@
     .card.text-white.bg-primary.text-center a {
         color: white !important;
     }
-    .card-body, .card-block {
+    .card-body:not(.login-card), .card-block {
         -ms-flex: 1 1 auto;
         flex: 1 1 auto;
         display: flex;
@@ -34,5 +34,8 @@
 
     blockquote {
         margin: 0;
+    }
+    .app-header.navbar .navbar-brand {
+        background-image: url(http://forcontact.com/wp-content/uploads/2018/01/logo_Forcontact_nuovo_Google-e1516734469445.png) !important;
     }
 </style>

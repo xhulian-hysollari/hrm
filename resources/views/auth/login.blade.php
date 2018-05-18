@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card-group">
                     <div class="card p-4">
-                        <div class="card-body">
+                        <div class="card-body login-card">
                             <h1>Login</h1>
                             <p class="text-muted">Sign In to your account</p>
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
