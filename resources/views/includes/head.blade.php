@@ -37,5 +37,6 @@
     }
     .app-header.navbar .navbar-brand {
         background-image: url(http://forcontact.com/wp-content/uploads/2018/01/logo_Forcontact_nuovo_Google-e1516734469445.png) !important;
+        background-size: 120px auto;
     }
 </style>
