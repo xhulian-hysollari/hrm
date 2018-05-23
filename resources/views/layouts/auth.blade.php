@@ -21,27 +21,11 @@
 </head>
 <body style="z-index:-1;background-color: #f6f6f6">
 <div id="app">
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}" style="padding:0">
-                    <img src="http://forcontact.com/wp-content/uploads/2018/01/logo_Forcontact_nuovo_Google-e1516734469445.png"
-                         style="height: 50px;">
-                </a>
-            </div>
-        </div>
-    </nav>
+    <header class="app-headernavbar">
+        <a class="navbar-brand" href="#">
+        </a>
+    </header>
     @yield('content')
 
 </div>
