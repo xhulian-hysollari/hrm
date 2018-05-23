@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.print.css" media='print'>
 @endsection
 @section('additionalJS')
-<script src="{{url('vendor/moment/moment.min.js')}}"></script>
+<script src="{{asset('vendor/moment/moment.min.js')}}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
 <script>
     $(document).ready(function() {

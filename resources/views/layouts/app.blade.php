@@ -9,11 +9,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'HRM') }}</title>
+    <style>
+        .app-header.navbar .navbar-brand {
+            background-image: url(http://forcontact.com/wp-content/uploads/2018/01/logo_Forcontact_nuovo_Google-e1516734469445.png) !important;
+        }
+    </style>
+@include('includes.head')
 
-    <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
-
-    <!-- Scripts -->
+<!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -21,40 +24,25 @@
     </script>
 </head>
 <body style="z-index:-1;background-color: #f6f6f6">
-<div id="app">
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}" style="padding:0">
-                    <img src="http://forcontact.com/wp-content/uploads/2018/01/logo_Forcontact_nuovo_Google-e1516734469445.png"
-                         style="height: 50px;">
-                </a>
-            </div>
-        </div>
-    </nav>
-    <div class="container">
+    <div id="app">
+        <header class="app-headernavbar">
+                    <a class="navbar-brand" href="#">
+                    </a>
+                </header>
+<div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="panel panel-default">
-                    @yield('content')
-                </div>
-            </div>
+        @yield('content')
+    </div></div>
         </div>
     </div>
 </div>
 
 <!-- Scripts -->
-<script src="/js/app.js"></script>
+<script src="{{asset('old/js/app.js')}}"></script>
+<script src="{{asset('vendors/js/jquery.min.js')}}"></script>
+<script src="{{asset('vendors/js/popper.min.js')}}"></script>
+<script src="{{asset('vendors/js/bootstrap.min.js')}}"></script>
 </body>
 </html>
