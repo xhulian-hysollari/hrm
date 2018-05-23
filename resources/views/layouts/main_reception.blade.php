@@ -22,8 +22,13 @@
             {{session('error')}}
         </div>
     @endif
-
-    @yield('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="panel panel-default">
+                @yield('content')
+            </div>
+        </div>
+    </div>
 </div>
 
 @include('includes.footer')

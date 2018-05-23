@@ -24,17 +24,18 @@
     </script>
 </head>
 <body style="z-index:-1;background-color: #f6f6f6">
-    <div id="app">
-        <header class="app-headernavbar">
-                    <a class="navbar-brand" href="#">
-                    </a>
-                </header>
-<div class="container">
+<div id="app">
+    <header class="app-headernavbar">
+        <a class="navbar-brand" href="#">
+        </a>
+    </header>
+    <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="panel panel-default">
-        @yield('content')
-    </div></div>
+                    @yield('content')
+                </div>
+            </div>
         </div>
     </div>
 </div>

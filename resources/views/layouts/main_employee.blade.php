@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  @include('includes.head')
+    @include('includes.head')
 </head>
 <body style="z-index:-1;background-color: #f6f6f6">
-    @include('includes.header_employee')
+@include('includes.header_employee')
 
-    <div class="container">
-        {!! Breadcrumbs::render(Route::currentRouteName(), @$breadcrumb) !!}
-        
-        @if(session('success'))
+<div class="container">
+    {!! Breadcrumbs::render(Route::currentRouteName(), @$breadcrumb) !!}
+
+    @if(session('success'))
         <div class="alert alert-success" role="alert">
-          <span class="sr-only">Success:</span>
-          {{session('success')}}
+            <span class="sr-only">Success:</span>
+            {{session('success')}}
         </div>
-        @endif
+    @endif
 
-        @if(session('error'))
+    @if(session('error'))
         <div class="alert alert-danger" role="alert">
-          <span class="sr-only">Error:</span>
-          {{session('error')}}
+            <span class="sr-only">Error:</span>
+            {{session('error')}}
         </div>
-        @endif
-
-        @yield('content')    
+    @endif
+    <div class="row">
+        <div class="col-12">
+            <div class="panel panel-default">
+                @yield('content')
+            </div>
+        </div>
     </div>
+</div>
 
-    @include('includes.footer')
+@include('includes.footer')
 
-    @yield('additionalCSS')
-    @yield('additionalJS')
+@yield('additionalCSS')
+@yield('additionalJS')
 </body>
 </html>
