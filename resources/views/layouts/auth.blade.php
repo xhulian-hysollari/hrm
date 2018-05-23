@@ -48,19 +48,12 @@
 </div>
 
 <!-- Scripts -->
-<script src="/js/app.js"></script>
+{{--<script src="/js/app.js"></script>--}}
 
 <script src="{{asset('vendors/js/jquery.min.js')}}"></script>
 <script src="{{asset('vendors/js/popper.min.js')}}"></script>
 <script src="{{asset('vendors/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('vendors/js/pace.min.js')}}"></script>
-
-<!-- Plugins and scripts required by all views -->
-<script src="{{asset('vendors/js/Chart.min.js')}}"></script>
-
-<!-- Alba main scripts -->
-
-<script src="{{asset('js/app.js')}}"></script>
 
 <!-- Plugins and scripts required by this views -->
 <script src="{{asset('vendors/js/toastr.min.js')}}"></script>
