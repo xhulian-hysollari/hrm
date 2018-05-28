@@ -158,11 +158,6 @@ return [
             'add_new' => 'Add New Currencies',
         ]
     ],
-    'employee' => [
-        'training' => [
-            'main' => 'Training'
-        ]
-    ],
     'pim' => [
         'main' => 'PIM',
         'birthdays' => 'Birthdays',
@@ -497,6 +492,9 @@ return [
             'store_success' => 'Leave request is successfully sent.',
             'update_success' => 'Leave request is successfully updated.',
             'delete_success' => 'Leave request is successfully deleted.',
+        ],
+        'training' => [
+            'main' => 'Training'
         ],
         'salary' => [
             'main' => 'Salary'
