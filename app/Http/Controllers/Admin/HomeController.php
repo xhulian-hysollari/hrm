@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Modules\Settings\Models\Forcontact;
 use App\Modules\Time\Repositories\Interfaces\TimeLogRepositoryInterface as TimeLogRepository;
 use App\Http\Controllers\Controller;
+use App\Post;
 
 class HomeController extends Controller
 {
@@ -17,7 +18,7 @@ class HomeController extends Controller
     public function index(TimeLogRepository $timeLogRepository)
     {
         $structures = Forcontact::all();
-
-        return view('welcome', compact('structures'));
+        $posts = Post::latest();
+        return view('welcome', compact('structures','posts'));
     }
 }
