@@ -1,8 +1,5 @@
 <header class="app-header navbar">
-    <a class="navbar-brand" href="#"></a>
-    {{--<button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">--}}
-        {{--<span class="navbar-toggler-icon"></span>--}}
-    {{--</button>--}}
+    <a class="navbar-brand" href="{{route('home')}}"></a>
     <ul class="nav navbar-nav d-md-down-none mr-auto">
 
         <li class="nav-item px-3">

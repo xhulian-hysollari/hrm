@@ -24,8 +24,10 @@
     @endif
     <div class="row">
         <div class="col-12">
-            <div class="panel panel-default">
-                @yield('content')
+            <div class="card">
+                <div class="card-body login-card">
+                    @yield('content')
+                </div>
             </div>
         </div>
     </div>

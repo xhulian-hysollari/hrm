@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 <div class="row">
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="col-md-4 col-sm-6">
         <div class="card text-white bg-primary text-center">
         <a class="nav-box" href="{{route('pim.employees.index')}}">
             <div class="card-body">
@@ -13,7 +13,7 @@
     </div>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="col-md-4 col-sm-6">
         <div class="card text-white bg-primary text-center">
             <a class="nav-box" href="{{route('pim.candidates.index')}}">
                 <div class="card-body">
@@ -26,7 +26,7 @@
     </div>
 
 
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="col-md-4 col-sm-6">
         <div class="card text-white bg-primary text-center">
             <a class="nav-box" href="{{route('admin.visitor.index')}}">
                 <div class="card-body">

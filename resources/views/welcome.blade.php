@@ -1,82 +1,40 @@
 @extends ('layouts.main')
 
 @section('content')
-<div class="row">
-    <div class="col-sm-6">
-        <div class="custom-panel">
-            <div class="custom-panel-heading">{{trans('app.leave.calendar.main')}}</div>
-            <div id="leave-calendar"></div>
+    <div class="row">
+        <div class="col-12">
+            <form action="{{route('post')}}" method="post" enctype="multipart/form-data">
+                {{csrf_field()}}
+                <div class="row">
+                    <div class="col-12">
+                        <label for="status">Status</label>
+                        <textarea name="status" id="status" class="form-control" style="width:100%"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="structure_id">Structure</label>
+                        <select name="structure_id" class="form-control" id="structure_id">
+                            <option value="0">All Structures</option>
+                            @foreach($structures as $structure)
+                                <option value="{{$structure->id}}">{{$structure->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="images">Images</label>
+                        <input type="file" class="form-control" name="images[]" id="images" multiple>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Save</button>
+            </form>
         </div>
     </div>
-    <div class="col-sm-6">
-        <div class="custom-panel">
-            <div class="custom-panel-heading">{{trans('app.pim.birthdays')}}</div>
-            <div id="birthday-calendar"></div>
+    <div class="row">
+        <div class="col-lg-12">
+            @foreach($posts as $post)
+                @include('includes.posts', ['post' => $post])
+            @endforeach
         </div>
     </div>
-</div>
-@endsection
-@section('additionalCSS')
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.print.css" media='print'>
-@endsection
-@section('additionalJS')
-<script src="{{asset('vendor/moment/moment.min.js')}}"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
-<script>
-    $(document).ready(function() {
-        var sources = [];
-        $('#leave-calendar').fullCalendar({
-            header: {
-                left: 'prev,next',
-                center: 'title',
-                right: 'month,basicWeek,basicDay'
-            },
-            defaultDate: '{{get_current_date()}}',
-            navLinks: true, // can click day/week names to navigate views
-            editable: false,
-            eventLimit: true, // allow "more" link when too many events
-            viewRender: function(view, element) {
-                var date = $('#leave-calendar').fullCalendar('getDate');
-                date = moment(date).format('YYYY-MM-DD');
-                if(sources.indexOf(date) == -1) {
-                    sources.push(date);
-                    $.ajax({
-                        url: "{{route('leave.calendar.render')}}",
-                        data: {date: date},
-                        success: function(events) {
-                            $('#leave-calendar').fullCalendar('addEventSource', events);
-                        }
-                    });
-                }
-            }
-        });
-        var sources = [];
-        $('#birthday-calendar').fullCalendar({
-            header: {
-                left: 'prev,next',
-                center: 'title',
-                right: 'month,basicWeek,basicDay'
-            },
-            defaultDate: '{{get_current_date()}}',
-            navLinks: true, // can click day/week names to navigate views
-            editable: false,
-            eventLimit: true, // allow "more" link when too many events
-            viewRender: function(view, element) {
-                var date = $('#birthday-calendar').fullCalendar('getDate');
-                date = moment(date).format('YYYY-MM-DD');
-                if(sources.indexOf(date) == -1) {
-                    sources.push(date);
-                    $.ajax({
-                        url: "{{route('pim.employees.birthdays')}}",
-                        data: {date: date},
-                        success: function(events) {
-                            $('#birthday-calendar').fullCalendar('addEventSource', events);
-                        }
-                    });
-                }
-            }
-        });
-    });
-</script>
 @endsection

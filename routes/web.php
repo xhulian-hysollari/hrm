@@ -12,6 +12,12 @@
 Route::get('/', function () {
     return redirect()->to('/login');
 });
+Route::post('/post/status', function () {
+    dd(\Illuminate\Support\Facades\Input::all());
+})->name('post');
+Route::post('/post/comment/{post_id}', function ($post_id) {
+    dd(\Illuminate\Support\Facades\Input::all());
+})->name('comment');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', '\App\Http\Controllers\Admin\HomeController@index')->name('home');
