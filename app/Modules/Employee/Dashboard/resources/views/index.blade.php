@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-sm-6 col-md-4">
             <div class="card text-white bg-primary text-center">
-                <a class="nav-box" href="{{route('employee.leaves')}}">
+                <a class="nav-box" href="{{route('employee.leaves.index')}}">
                     <div class="card-body">
                         <blockquote class="card-bodyquote">
                             <h2>{{trans('app.leave.main')}}</h2>
