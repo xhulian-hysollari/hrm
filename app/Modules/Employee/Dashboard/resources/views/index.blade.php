@@ -80,38 +80,17 @@
             </div>
         </div>
     </div>
-    <li class="{{ $current == 'employee.training' ? 'active' : ''}}">
-        <a href="{{route('employee.training.index')}}"> {{trans('app.employee.training.main')}}
-            @if($current == 'employee.training')
-                <span class="sr-only">({{trans('app.current')}})</span>
-            @endif
-        </a>
-    </li>
-    <li class="{{ $current == 'employee.documents' ? 'active' : ''}}">
-        <a href="{{route('employee.documents.index')}}"> {{trans('app.pim.employees.documents.main')}}
-            @if($current == 'employee.documents')
-                <span class="sr-only">({{trans('app.current')}})</span>
-            @endif
-        </a>
-    </li>
-    <li class="{{ $current == 'employee.dashboard_documents' ? 'active' : ''}}">
-        <a href="{{route('employee.dashboard_documents.index')}}">{{trans('app.dashboard.main')}}
-            @if($current == 'employee.dashboard_documents')
-                <span class="sr-only">({{trans('app.current')}})</span>
-            @endif
-        </a>
-    </li>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="custom-panel">
-            <div class="custom-panel-heading">{{trans('app.dashboard.documents.main')}}</div>
-            <table class="table table-bordered table-hover" id="dashboardDocumentsTable">
-                <thead>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="custom-panel">
+                <div class="custom-panel-heading">{{trans('app.dashboard.documents.main')}}</div>
+                <table class="table table-bordered table-hover" id="dashboardDocumentsTable">
+                    <thead>
                     <th>{{trans('app.id')}}</th>
                     <th>{{trans('app.dashboard.documents.name')}}</th>
                     <th></th>
-                </thead>
-                <tfoot>
+                    </thead>
+                    <tfoot>
                     <th>
                         <input type="text" placeholder="{{trans('app.id')}}"/>
                     </th>
@@ -119,46 +98,46 @@
                         <input type="text" placeholder="{{trans('app.dashboard.documents.name')}}"/>
                     </th>
                     <th></th>
-                </tfoot>
-            </table>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 @endsection
 @section('additionalCSS')
-<link rel="stylesheet" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
 @endsection
 @section('additionalJS')
-<script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function(){
+    <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
 
-        var table = $('#dashboardDocumentsTable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '{{ route("employee.dashboard_documents.datatable")}}',
-            columns: [
-                {data: 0, name: 'id'},
-                {data: 1, name: 'name'},
-                {data: 2, name: 'actions', sortable: false, searchable: false}
-            ]
-        });
-
-        table.columns().every(function () {
-            var that = this;
-            $('input', this.footer()).on( 'keyup change', function () {
-                if (that.search() !== this.value) {
-                    that.search(this.value).draw();
-                }
+            var table = $('#dashboardDocumentsTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route("employee.dashboard_documents.datatable")}}',
+                columns: [
+                    {data: 0, name: 'id'},
+                    {data: 1, name: 'name'},
+                    {data: 2, name: 'actions', sortable: false, searchable: false}
+                ]
             });
-            $('select', this.footer()).on( 'change', function () {
-                if (that.search() !== this.value) {
-                    that.search(this.value).draw();
-                }
-            });
-        });
 
-        $('#dashboardDocumentsTable').removeClass('dataTable');
-    });
-</script>
+            table.columns().every(function () {
+                var that = this;
+                $('input', this.footer()).on('keyup change', function () {
+                    if (that.search() !== this.value) {
+                        that.search(this.value).draw();
+                    }
+                });
+                $('select', this.footer()).on('change', function () {
+                    if (that.search() !== this.value) {
+                        that.search(this.value).draw();
+                    }
+                });
+            });
+
+            $('#dashboardDocumentsTable').removeClass('dataTable');
+        });
+    </script>
 @endsection
