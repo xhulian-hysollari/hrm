@@ -73,7 +73,7 @@
                 <a class="nav-box" href="{{route('employee.documents.index')}}">
                     <div class="card-body">
                         <blockquote class="card-bodyquote">
-                            <h2>{{trans('app.employee.documents.main')}}</h2>
+                            <h2>{{trans('app.pim.employees.documents.main')}}</h2>
                         </blockquote>
                     </div>
                 </a>
