@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function index(TimeLogRepository $timeLogRepository)
     {
         $structures = Forcontact::all();
-        $posts = Post::latest();
+        $posts = Post::latest()->get();
         return view('welcome', compact('structures','posts'));
     }
 }

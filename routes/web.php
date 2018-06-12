@@ -12,9 +12,7 @@
 Route::get('/', function () {
     return redirect()->to('/login');
 });
-Route::post('/post/status', function () {
-    dd(\Illuminate\Support\Facades\Input::all());
-})->name('post');
+Route::post('/post/status', 'PostController@store')->name('post');
 Route::post('/post/comment/{post_id}', function ($post_id) {
     dd(\Illuminate\Support\Facades\Input::all());
 })->name('comment');

@@ -1,5 +1,106 @@
 @extends('layouts.main_employee')
 @section('content')
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="card text-white bg-primary text-center">
+                <a class="nav-box" href="{{route('employee.leaves')}}">
+                    <div class="card-body">
+                        <blockquote class="card-bodyquote">
+                            <h2>{{trans('app.leave.main')}}</h2>
+                        </blockquote>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="card text-white bg-primary text-center">
+                <a class="nav-box" href="{{route('employee.time.index')}}">
+                    <div class="card-body">
+                        <blockquote class="card-bodyquote">
+                            <h2>{{trans('app.time.time_logs.main')}}</h2>
+                        </blockquote>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="card text-white bg-primary text-center">
+                <a class="nav-box" href="{{route('employee.time.report')}}">
+                    <div class="card-body">
+                        <blockquote class="card-bodyquote">
+                            <h2>{{trans('app.time.time_logs.report')}}</h2>
+                        </blockquote>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="card text-white bg-primary text-center">
+                <a class="nav-box" href="{{route('employee.salary.index')}}">
+                    <div class="card-body">
+                        <blockquote class="card-bodyquote">
+                            <h2>{{trans('app.employee.salary.main')}}</h2>
+                        </blockquote>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="card text-white bg-primary text-center">
+                <a class="nav-box" href="{{route('employee.training.index')}}">
+                    <div class="card-body">
+                        <blockquote class="card-bodyquote">
+                            <h2>{{trans('app.employee.training.main')}}</h2>
+                        </blockquote>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="card text-white bg-primary text-center">
+                <a class="nav-box" href="{{route('employee.documents.index')}}">
+                    <div class="card-body">
+                        <blockquote class="card-bodyquote">
+                            <h2>{{trans('app.employee.documents.main')}}</h2>
+                        </blockquote>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="card text-white bg-primary text-center">
+                <a class="nav-box" href="{{route('employee.documents.index')}}">
+                    <div class="card-body">
+                        <blockquote class="card-bodyquote">
+                            <h2>{{trans('app.employee.documents.main')}}</h2>
+                        </blockquote>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <li class="{{ $current == 'employee.training' ? 'active' : ''}}">
+        <a href="{{route('employee.training.index')}}"> {{trans('app.employee.training.main')}}
+            @if($current == 'employee.training')
+                <span class="sr-only">({{trans('app.current')}})</span>
+            @endif
+        </a>
+    </li>
+    <li class="{{ $current == 'employee.documents' ? 'active' : ''}}">
+        <a href="{{route('employee.documents.index')}}"> {{trans('app.pim.employees.documents.main')}}
+            @if($current == 'employee.documents')
+                <span class="sr-only">({{trans('app.current')}})</span>
+            @endif
+        </a>
+    </li>
+    <li class="{{ $current == 'employee.dashboard_documents' ? 'active' : ''}}">
+        <a href="{{route('employee.dashboard_documents.index')}}">{{trans('app.dashboard.main')}}
+            @if($current == 'employee.dashboard_documents')
+                <span class="sr-only">({{trans('app.current')}})</span>
+            @endif
+        </a>
+    </li>
 <div class="row">
     <div class="col-sm-12">
         <div class="custom-panel">

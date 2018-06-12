@@ -1,5 +1,5 @@
 <div class="row">
-    @if($post->images)
+    @if(count($post->images) > 0)
         <div class="col-6">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
@@ -29,7 +29,9 @@
         <hr>
         {{$post->body}}
     </div>
-    <div class="col-6">
+</div>
+<div class="row">
+    <div class="col-12">
         @if(count($post->comments) === 0)
             There are no comments yet on this post.
         @else

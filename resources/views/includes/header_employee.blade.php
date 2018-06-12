@@ -1,86 +1,37 @@
-<nav class="navbar navbar-default">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">{{ trans('app.toggle_nav') }}</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{route('employee.home')}}" style="padding:0">
-        <img src="http://forcontact.com/wp-content/uploads/2018/01/logo_Forcontact_nuovo_Google-e1516734469445.png" style="height: 50px;">
-      </a>
-    </div>
+<header class="app-header navbar">
+    <a class="navbar-brand" href="{{route('home')}}"></a>
+    <ul class="nav navbar-nav d-md-down-none mr-auto">
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <!-- MENU ITEMS GO HERE -->
-      <ul class="nav navbar-nav">
-        <li class="{{ $current == 'employee.leaves' ? 'active' : ''}}">
-          <a href="{{route('employee.leaves.index')}}"> {{trans('app.leave.main')}}
-              @if($current == 'employee.leaves') 
-                <span class="sr-only">({{trans('app.current')}})</span>
-              @endif
-          </a>
-        </li>
-        <li class="dropdown {{ $current == 'employee.time' ? 'active' : ''}}">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{trans('app.time.main')}} <span class="caret"></span>
-              @if($current == 'employee.time') 
-              <span class="sr-only">({{trans('app.current')}})</span>
-              @endif
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="{{route('employee.time.index')}}">{{trans('app.time.time_logs.main')}}</a></li>
-            <li><a href="{{route('employee.time.report')}}">{{trans('app.time.time_logs.report')}}</a></li>
-          </ul>
-        </li>
-        <li class="{{ $current == 'employee.salary' ? 'active' : ''}}">
-          <a href="{{route('employee.salary.index')}}"> {{trans('app.employee.salary.main')}}
-              @if($current == 'employee.salary')
-                <span class="sr-only">({{trans('app.current')}})</span>
-              @endif 
-          </a>
-        </li>
-        <li class="{{ $current == 'employee.training' ? 'active' : ''}}">
-          <a href="{{route('employee.training.index')}}"> {{trans('app.employee.training.main')}}
-              @if($current == 'employee.training')
-                <span class="sr-only">({{trans('app.current')}})</span>
-              @endif
-          </a>
-        </li>
-        <li class="{{ $current == 'employee.documents' ? 'active' : ''}}">
-          <a href="{{route('employee.documents.index')}}"> {{trans('app.pim.employees.documents.main')}}
-              @if($current == 'employee.documents')
-                <span class="sr-only">({{trans('app.current')}})</span>
-              @endif
-          </a>
-        </li> 
-        <li class="{{ $current == 'employee.dashboard_documents' ? 'active' : ''}}">
-          <a href="{{route('employee.dashboard_documents.index')}}">{{trans('app.dashboard.main')}}
-            @if($current == 'employee.dashboard_documents') 
-              <span class="sr-only">({{trans('app.current')}})</span>
-            @endif
+        <li class="nav-item px-3 {{ $current == 'home' ? 'active' : ''}}">
+            <a href="{{route('home')}}">Home
+                @if($current == 'home')
+                    <span class="sr-only">({{trans('app.current')}})</span>
+                @endif
             </a>
         </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->first_name }} <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li>
-                <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
+        <li class="nav-item px-3 {{ $current == 'employee.dashboard_documents' ? 'active' : ''}}">
+            <a href="{{route('employee.dashboard_documents.index')}}">{{trans('app.dashboard.main')}}
+                @if($current == 'employee.dashboard_documents')
+                    <span class="sr-only">({{trans('app.current')}})</span>
+                @endif
+            </a>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item dropdown d-md-down-none">
+            <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+               aria-expanded="false">{{ Auth::user()->first_name }}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+                <a href="{{ route('logout') }}" class="dropdown-item"
+                   onclick="event.preventDefault();
+document.getElementById('logout-form').submit();">
                     {{trans('app.logout')}}
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
-            </li>
-          </ul>
+            </div>
         </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+    </ul>
+</header>
