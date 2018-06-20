@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Image;
 use App\Modules\Settings\Models\Forcontact;
 use App\Post;
@@ -53,9 +54,19 @@ class PostController extends Controller
         }
     }
 
-    public function comment($id)
+    public function comment($id, Request $request)
     {
-
+        try{
+            $user = Auth::user();
+            $comment = new Comment();
+            $comment->body = $request->comment;
+            $comment->user_id = $user->id;
+            $comment->post_id = $id;
+            $comment->save();
+            return redirect()->back();
+        }catch (\Exception $exception){
+            throw $exception;
+        }
     }
 
     public function removePost($id)

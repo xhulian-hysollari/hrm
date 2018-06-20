@@ -48,4 +48,21 @@
     tr > td:last-child {
         display: flex;
     }
+    input[type=text],input[type=search]{
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: #3e515b;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #e3e8ec;
+        border-radius: 0;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    .dataTables_filter > label{
+        display: flex;
+        align-items: center;
+    }
 </style>

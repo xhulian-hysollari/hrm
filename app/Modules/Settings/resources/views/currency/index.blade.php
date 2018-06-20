@@ -18,13 +18,13 @@
                 </thead>
                 <tfoot>
                     <th>
-                        <input type="text" placeholder="{{trans('app.id')}}"/>
+                        <input class="form-control" type="text" placeholder="{{trans('app.id')}}"/>
                     </th>
                     <th>
-                        <input type="text" placeholder="{{trans('app.settings.currency.code')}}"/>
+                        <input class="form-control" type="text" placeholder="{{trans('app.settings.currency.code')}}"/>
                     </th>
                     <th>
-                        <input type="text" placeholder="{{trans('app.settings.currency.display')}}"/>
+                        <input class="form-control" type="text" placeholder="{{trans('app.settings.currency.display')}}"/>
                     </th>
                     <th></th>
                 </tfoot>

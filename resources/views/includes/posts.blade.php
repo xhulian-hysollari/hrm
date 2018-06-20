@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="margin: 0 -21px; border-top:20px solid #f6f6f6">
     @if(count($post->images) > 0)
         <div class="col-6">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -36,7 +36,9 @@
             There are no comments yet on this post.
         @else
             @foreach($post->comments as $comment)
-
+                <div>
+                    {{$comment->body}}
+                </div>
             @endforeach
         @endif
         <form action="{{route('comment', ['post_id' => $post->id])}}" method="post" enctype="multipart/form-data">

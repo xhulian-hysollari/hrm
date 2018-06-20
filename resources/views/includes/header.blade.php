@@ -68,7 +68,7 @@
     </ul>
 
     <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item dropdown d-md-down-none">
+        <li class="nav-item dropdown d-md-down-none px-5">
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                aria-expanded="false">{{ Auth::user()->first_name }}
             </a>

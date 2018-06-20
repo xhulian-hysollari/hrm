@@ -7,6 +7,7 @@ use App\Modules\Visitor\Repositories\Interfaces\VisitorRepositoryInterface as Vi
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Datatables;
+use Illuminate\Support\Facades\Auth;
 
 class VisitorController extends Controller
 {
@@ -28,7 +29,12 @@ class VisitorController extends Controller
      */
     public function index()
     {
-        return view('visitor::visitor.index');
+        $user = Auth::user();
+        if ($user->role === 1){
+            $layout = 'layouts.main';
+            return view('visitor::visitor.index', compact('layout'));
+        }
+        return view('visitor::visitor.index', compact('layout'));
     }
 
     /**
