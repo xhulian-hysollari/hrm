@@ -42,4 +42,10 @@
     label{
         margin: .5rem 0 !important;
     }
+    .btn {
+        margin-top: 10px;
+    }
+    tr > td:last-child {
+        display: flex;
+    }
 </style>

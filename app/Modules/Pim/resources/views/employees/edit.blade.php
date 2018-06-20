@@ -16,32 +16,63 @@
     <div class="col-sm-12">
         <div class="custom-panel">
             <div class="custom-panel-heading">{{trans('app.pim.employees.additional')}}</div>
-            <div class="clearfix">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <a class="nav-box" href="{{route('pim.employees.social_media.index', $employee->id)}}">
-                        <h2>{{trans('app.pim.employees.external_accounts.main')}}</h2>
-                    </a>
+            <div class="clearfix row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="card text-white bg-primary text-center">
+                        <a class="nav-box" href="{{route('pim.employees.social_media.index', $employee->id)}}">
+                            <div class="card-body">
+                                <blockquote class="card-bodyquote">
+                                    <h2>{{trans('app.pim.employees.external_accounts.main')}}</h2>
+                                </blockquote>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <a class="nav-box" href="{{route('pim.employees.contact_details.index', $employee->id)}}">
-                        <h2>{{trans('app.pim.employees.contact_details.main')}}</h2>
-                    </a>
+                <div class="col-md-4 col-sm-6">
+                    <div class="card text-white bg-primary text-center">
+                        <a class="nav-box" href="{{route('pim.employees.contact_details.index', $employee->id)}}">
+                            <div class="card-body">
+                                <blockquote class="card-bodyquote">
+                                    <h2>{{trans('app.pim.employees.contact_details.main')}}</h2>
+                                </blockquote>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <a class="nav-box" href="{{route('pim.employees.qualifications.index', $employee->id)}}">
-                        <h2>{{trans('app.pim.employees.qualifications.main')}}</h2>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <a class="nav-box" href="{{route('pim.employees.salaries.index', $employee->id)}}">
-                        <h2>{{trans('app.pim.employees.salaries.main')}}</h2>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <a class="nav-box" href="{{route('pim.employees.documents.index', $employee->id)}}">
-                        <h2>{{trans('app.pim.employees.documents.main')}}</h2>
-                    </a>
-                </div>
+                <div class="col-md-4 col-sm-6">
+                                <div class="card text-white bg-primary text-center">
+                                    <a class="nav-box" href="{{route('pim.employees.qualifications.index', $employee->id)}}">
+                                        <div class="card-body">
+                                            <blockquote class="card-bodyquote">
+                                                <h2>{{trans('app.pim.employees.qualifications.main')}}</h2>
+                                            </blockquote>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                <div class="col-md-4 col-sm-6">
+                                <div class="card text-white bg-primary text-center">
+                                    <a class="nav-box" href="{{route('pim.employees.salaries.index', $employee->id)}}">
+                                        <div class="card-body">
+                                            <blockquote class="card-bodyquote">
+                                                <h2>{{trans('app.pim.employees.salaries.main')}}</h2>
+                                            </blockquote>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                <div class="col-md-4 col-sm-6">
+                                    <div class="card text-white bg-primary text-center">
+                                        <a class="nav-box" href="{{route('pim.employees.documents.index', $employee->id)}}">
+                                            <div class="card-body">
+                                                <blockquote class="card-bodyquote">
+                                                    <h2>{{trans('app.pim.employees.documents.main')}}</h2>
+                                                </blockquote>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
             </div>
         </div>
     </div>

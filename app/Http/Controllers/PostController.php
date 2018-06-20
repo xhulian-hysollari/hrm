@@ -45,6 +45,9 @@ class PostController extends Controller
                     $image->save();
                 }
             }
+
+            return redirect()->back();
+
         } catch (\Exception $exception) {
             throw $exception;
         }
