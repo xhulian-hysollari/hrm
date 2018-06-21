@@ -10,16 +10,15 @@
     <div class="col-sm-12">
         <div class="custom-panel">
             <div class="custom-panel-heading">{{trans('app.pim.employees.documents.add_new')}}</div>
-            {!! Form::open(['route' => ['time.time_logs.upload'], 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
-            <div class="form-group">
+            {!! Form::open(['route' => ['time.time_logs.upload'], 'class' => 'form-horizontal row', 'enctype' => 'multipart/form-data']) !!}
+            <div class="form-group col-md-6">
                 {!! Form::label('attachment', trans('app.pim.employees.documents.attachment'), ['class' => 'col-sm-3']) !!}
-                <div class="col-sm-6">
-                    {!! Form::input('file', 'attachment', null, ['class' => 'form-control']) !!}
+                <div class="col-sm-12">
+                    {!! Form::input('file', 'attachment', null ) !!}
                 </div>
             </div>
-            <hr>
-            <div class="form-group">
-                <div class="col-sm-6 col-sm-offset-3">
+            <div class="form-group col-md-6" style="display: flex; align-items: flex-end; justify-content: flex-end;">
+                <div>
                     <a href="{{route('pim.employees.documents.index', Route::input('employeeId'))}}" class="btn btn-default">{{trans('app.cancel')}}</a>
                     {!! Form::submit(trans('app.submit'), ['class' => 'btn btn-primary']) !!}
                 </div>
@@ -28,20 +27,21 @@
         </div>
     </div>
 </div>
+<hr>
 <div class="row">
     <div class="col-sm-12">
         <div class="custom-panel">
             <div class="custom-panel-heading">{{trans('app.time.time_logs.main')}}</div>
             <div class="form-group clearfix">
-                <form method="get" id="date_filter" action="">
+                <form method="get" class="row" id="date_filter" action="">
                     <div class="col-md-3">
                         <input type="date" class="form-control" id="date_start" placeholder="{{trans('app.time.time_logs.start_date')}}" required/>
                     </div>
                     <div class="col-md-3">
-                        <input type="date" class="form-control col-md-3" id="date_end" placeholder="{{trans('app.time.time_logs.end_date')}}" required/>
+                        <input type="date" class="form-control" id="date_end" placeholder="{{trans('app.time.time_logs.end_date')}}" required/>
                     </div>
                     <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary">{{trans('app.filter')}}</button>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 0;">{{trans('app.filter')}}</button>
                     </div>
                 </form>
             </div>
