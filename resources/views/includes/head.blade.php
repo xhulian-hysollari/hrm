@@ -13,6 +13,9 @@
 <link href="{{asset('vendors/css/toastr.min.css')}}" rel="stylesheet">
 
 <style>
+    .custom-panel-heading{
+         display: none;
+    }
     .container{
         margin-top: 20px;
     }
