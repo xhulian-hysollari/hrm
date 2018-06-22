@@ -7,7 +7,7 @@
                 {{csrf_field()}}
                 <div class="row">
                     <div class="col-12">
-                        <label for="title">title</label>
+                        <label for="title">Title</label>
                         <input type="text" name="title" id="title" class="form-control" style="width:100%">
                     </div>
                 </div>
@@ -23,13 +23,14 @@
                         <select name="structure_id" class="form-control" id="structure_id" multiple>
                             <option value="0">All Structures</option>
                             @foreach($structures as $structure)
-                                <option value="{{$structure->id}}">{{$structure->name}}</option>
+                                <option value="{{$structure->id}}">{{$structure->company_name}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-6">
                         <label for="images">Images</label>
-                        <input type="file" class="form-control" name="images[]" id="images" multiple>
+                        <br>
+                        <input type="file" name="images[]" id="images" multiple>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success">Save</button>
