@@ -31,6 +31,13 @@ Breadcrumbs::register('settings.index', function($breadcrumbs)
     $breadcrumbs->push(trans('app.settings.main'), route('settings.index'));
 });
 
+// Home > Reception
+Breadcrumbs::register('reception.home', function($breadcrumbs)
+{
+//    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('app.visitor.main'), route('reception.home'));
+});
+
 /**
  * Job positions breadcrumbs start here
  */

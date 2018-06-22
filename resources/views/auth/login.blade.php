@@ -11,19 +11,25 @@
                             <p class="text-muted">Sign In to your account</p>
                             <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                                 {{ csrf_field() }}
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                                @endif
                                 <div class="input-group mb-3 {{ $errors->has('email') ? ' has-error' : '' }}">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="icon-user"></i></span>
                                     </div>
                                     <input id="email" type="email" class="form-control" name="email"
                                            value="{{ old('email') }}" required autofocus>
-
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                                    @endif
                                 </div>
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
                                 <div class="input-group mb-4{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="icon-lock"></i></span>
@@ -31,11 +37,6 @@
 
                                     <input id="password" type="password" class="form-control" name="password" required>
 
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
 
                                 <div class="form-group">
@@ -62,12 +63,12 @@
                             </form>
                         </div>
                     </div>
-                    <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
-                        <div class="card-body text-center">
-                            <div>
-
-                            </div>
-                        </div>
+                    <div class="card text-white py-5 d-md-down-none" style="width:44%;
+                            background-size: contain;
+                            background-position: center;
+                            background-repeat: no-repeat;
+                            background-color: #4379b3 !important;
+                            background-image: url('{{asset('img/login_logo.png')}}')">
                     </div>
                 </div>
             </div>

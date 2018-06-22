@@ -10,6 +10,6 @@ class HomeController extends Controller
     //
     public function index()
     {
-        return view('welcome-reception');
+        return view('visitor::visitor.index');
     }
 }

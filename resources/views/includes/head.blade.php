@@ -65,4 +65,11 @@
         display: flex;
         align-items: center;
     }
+    [class*="primary"]{
+        background-color: #4379b3 !important;
+    }
+
+    .help-block{
+        color:#aa5500;
+    }
 </style>
