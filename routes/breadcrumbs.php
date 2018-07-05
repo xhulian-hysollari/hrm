@@ -30,6 +30,17 @@ Breadcrumbs::register('settings.index', function($breadcrumbs)
     $breadcrumbs->parent('home');
     $breadcrumbs->push(trans('app.settings.main'), route('settings.index'));
 });
+Breadcrumbs::register('iqos.index', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('IQOS', route('iqos.index'));
+});
+// Home > Settings
+Breadcrumbs::register('schedule', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('app.schedule.main'), route('schedule'));
+});
 
 // Home > Reception
 Breadcrumbs::register('reception.home', function($breadcrumbs)

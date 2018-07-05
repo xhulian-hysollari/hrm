@@ -21,6 +21,7 @@ class User extends Authenticatable
     const USER_ROLE_CANDIDATE = 3;
     const USER_ROLE_RECEPTION = 4;
     const USER_ROLE_HR = 5;
+    const USER_ROLE_SUPERVISOR = 6;
 
     use Notifiable;
 
@@ -60,6 +61,7 @@ class User extends Authenticatable
         'contact',
     ];
 
+//    protected $appends = ['full_name'];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -140,4 +142,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserDocument::class);
     }
+
+//    public function getFullNameAttribute(){
+//        return ucfirst($this->attributes['first_name']) . ' ' . ucfirst($this->attributes['last_name']);
+//    }
 }

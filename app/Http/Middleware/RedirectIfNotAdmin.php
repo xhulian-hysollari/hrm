@@ -18,7 +18,7 @@ class RedirectIfNotAdmin
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($request->user()->role != User::USER_ROLE_ADMIN) {
+        if ($request->user()->role != User::USER_ROLE_ADMIN && $request->user()->role != User::USER_ROLE_HR) {
             return redirect()->back();
         }
 

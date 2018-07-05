@@ -12,4 +12,8 @@ class Post extends Model
     public function comments(){
         return $this->hasMany(Comment::class);
     }
+    public function getAuthorAttribute(){
+        $user = User::where('id', $this->attributes['user_id'])->first();
+        return ucfirst(str_limit($user->first_name, 1, '.')).' '. ucfirst($user->last_name);
+    }
 }

@@ -17,7 +17,7 @@ class RedirectIfNotEmployee
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user()->role != User::USER_ROLE_EMPLOYEE) {
+        if ($request->user()->role != User::USER_ROLE_EMPLOYEE && $request->user()->role != User::USER_ROLE_SUPERVISOR) {
             return redirect()->back();
         }
 

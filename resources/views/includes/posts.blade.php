@@ -1,15 +1,14 @@
-<div class="row" style="margin: 0 -21px; border-top:20px solid #f6f6f6; padding-top: 15px">
+<div class="row" style="margin: 0 -25px; border-top:20px solid #f6f6f6; padding: 15px 15px 0 15px">
     @if(count($post->images) > 0)
         <div class="col-6">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     @foreach($post->images as $index => $image)
-                        <div class="carousel-item active">
+                        <div class="carousel-item @if($index === 0) active @endif">
                             <img class="d-block w-100"
-                                 data-src="holder.js/800x400?auto=yes&amp;bg=777&amp;fg=555&amp;text=First slide"
-                                 alt="First slide [800x400]"
-                                 {{--src="{{$image->path}}"--}}
+                                 {{--src="{{asset($image->path)}}"--}}
                                  src="https://images.unsplash.com/photo-1515163988842-60ece4c9a5bb?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7e6b67128f0c03c7bd1ecfbe6f890b1f&w=1000&q=80"
+
                                  data-holder-rendered="true">
                         </div>
                     @endforeach
@@ -24,20 +23,31 @@
                 </a>
             </div>
         </div>
+        <div class="col-6">
+            <h3>{{$post->title}} <span class="pull-right"
+                                       style="font-size: 15px; font-weight: initial;"><i>Posted by:</i> <b>{{$post->author}}</b> @ {{\Carbon\Carbon::parse($post->created_at)->format('d M Y')}}</span>
+            </h3>
+            <hr>
+            {{$post->body}}
+        </div>
+    @else
+
+        <div class="col-12">
+            <h3>{{$post->title}} <span class="pull-right"
+                                       style="font-size: 15px; font-weight: initial;"><i>Posted by:</i> <b>{{$post->author}}</b> @ {{\Carbon\Carbon::parse($post->created_at)->format('d M Y')}}</span>
+            </h3>
+            <hr>
+            {{$post->body}}
+        </div>
     @endif
-    <div class="col-6">
-        <h3>{{$post->title}}</h3>
-        <hr>
-        {{$post->body}}
-    </div>
 </div>
 <div class="row">
     <div class="col-12" style="padding: 20px">
         @foreach($post->comments as $comment)
             <div>
-                    {{$comment->body}}
-                </div>
-            @endforeach
+                {{$comment->body}}
+            </div>
+        @endforeach
 
         <form action="{{route('comment', ['post_id' => $post->id])}}" method="post" enctype="multipart/form-data">
             {{csrf_field()}}

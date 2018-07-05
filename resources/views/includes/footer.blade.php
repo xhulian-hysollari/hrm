@@ -37,4 +37,3 @@
 <script src="{{asset('vendors/js/moment.min.js')}}"></script>
 <script src="{{asset('vendors/js/daterangepicker.min.js')}}"></script>
 <script src="{{asset('js/views/main.js')}}"></script>
-<script src="{{asset('js/app.js')}}"></script>

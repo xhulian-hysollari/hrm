@@ -12,8 +12,21 @@
 Route::get('/', function () {
     return redirect()->to('/login');
 });
+Route::get('/iqos', function () {
+    return view('iqos.index');
+})->name('iqos.index');
+Route::post('/iqos', 'IqosController@parse')->name('iqos.parse');
+Route::get('/test', function () {
+    for ($i = 0; $i < 7; $i++){
+        print \Carbon\Carbon::parse('next monday')->addDays($i)->format('D, d M Y') . PHP_EOL;
+    }
+});
 Route::post('/post/status', 'PostController@store')->name('post');
 Route::post('/post/comment/{post_id}', 'PostController@comment')->name('comment');
+
+Route::get('schedule', 'ScheduleController@index')->name('schedule');
+Route::get('schedule/datatable', 'ScheduleController@getDatatable')
+    ->name('schedule.datatable');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', '\App\Http\Controllers\Admin\HomeController@index')->name('home');
