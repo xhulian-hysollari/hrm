@@ -224,7 +224,7 @@ class EmployeesController extends Controller
 
     protected function parseEmployees($reader, $maxRow)
     {
-        $startRow = 4;
+        $startRow = 2;
         $skills = [];
         do {
             if (
@@ -233,23 +233,23 @@ class EmployeesController extends Controller
                 if ($reader->getCell(sprintf('B%s', $startRow))->getValue() == "SI") {
                     $first_name = $reader->getCell(sprintf('C%s', $startRow))->getValue();
                     $last_name = $reader->getCell(sprintf('E%s', $startRow))->getValue();
-                    $email = trim($reader->getCell(sprintf('O%s', $startRow))->getValue());
+                    $email = trim($reader->getCell(sprintf('M%s', $startRow))->getValue());
                     $personalMail =  (isset($email) && $email != "" ) ? $email : strtolower($first_name) . '.' . strtolower($last_name) . '@forcontact.com';
                     $emailValue =  strtolower($first_name) . '.' . strtolower($last_name) . '@forcontact.com';
                     $parsedData = [
                         'first_name' => ucfirst(strtolower($first_name)),
                         'last_name' => ucfirst(strtolower($last_name)),
                         'father_name' => $reader->getCell(sprintf('D%s', $startRow))->getValue(),
-                        'contact' => $reader->getCell(sprintf('N%s', $startRow))->getValue(),
-                        'birth_date' => $reader->getCell(sprintf('H%s', $startRow))->getValue(),
-                        'matricola' => $reader->getCell(sprintf('G%s', $startRow))->getValue(),
-                        'birthplace' => $reader->getCell(sprintf('J%s', $startRow))->getValue(),
-                        'id_card' => $reader->getCell(sprintf('I%s', $startRow))->getValue(),
-                        'education_title' => $reader->getCell(sprintf('L%s', $startRow))->getValue(),
-                        'address' => $reader->getCell(sprintf('K%s', $startRow))->getValue(),
-                        'profession' => $reader->getCell(sprintf('M%s', $startRow))->getValue(),
-                        'active' => $reader->getCell(sprintf('B%s', $startRow))->getValue(),
-                        'role' => '2',
+                        'contact' => $reader->getCell(sprintf('L%s', $startRow))->getValue(),
+                        'birth_date' => $reader->getCell(sprintf('F%s', $startRow))->getValue(),
+                        'matricola' => $reader->getCell(sprintf('B%s', $startRow))->getValue(),
+                        'birthplace' => $reader->getCell(sprintf('H%s', $startRow))->getValue(),
+                        'id_card' => $reader->getCell(sprintf('G%s', $startRow))->getValue(),
+                        'education_title' => $reader->getCell(sprintf('J%s', $startRow))->getValue(),
+                        'address' => $reader->getCell(sprintf('I%s', $startRow))->getValue(),
+                        'profession' => $reader->getCell(sprintf('K%s', $startRow))->getValue(),
+                        'active' => 1,
+                        'role' => 2,
                         'personal_email' => $personalMail,
                         'email' => $emailValue,
                     ];
