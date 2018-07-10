@@ -23,7 +23,7 @@ class PostController extends Controller
             $post->save();
             if ($request->structure_id == 0) {
                 foreach (Forcontact::all() as $structure) {
-                    DB::table('post_structure')->create([
+                    DB::table('post_structure')->insert([
                         'post_id' => $post->id,
                         'structure_id' => $structure->id,
                     ]);

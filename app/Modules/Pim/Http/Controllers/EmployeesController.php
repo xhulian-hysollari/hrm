@@ -237,8 +237,8 @@ class EmployeesController extends Controller
                     $personalMail =  (isset($email) && $email != "" ) ? $email : strtolower($first_name) . '.' . strtolower($last_name) . '@forcontact.com';
                     $emailValue =  strtolower($first_name) . '.' . strtolower($last_name) . '@forcontact.com';
                     $parsedData = [
-                        'first_name' => ucfirst($first_name),
-                        'last_name' => ucfirst($last_name),
+                        'first_name' => ucfirst(strtolower($first_name)),
+                        'last_name' => ucfirst(strtolower($last_name)),
                         'father_name' => $reader->getCell(sprintf('D%s', $startRow))->getValue(),
                         'contact' => $reader->getCell(sprintf('N%s', $startRow))->getValue(),
                         'birth_date' => $reader->getCell(sprintf('H%s', $startRow))->getValue(),
