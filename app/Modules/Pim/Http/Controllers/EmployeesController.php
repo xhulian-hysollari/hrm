@@ -254,6 +254,7 @@ class EmployeesController extends Controller
                         'email' => $emailValue,
                     ];
                     $user = User::create($parsedData);
+                    $this->sendPassword($user->id);
                 }
                 $startRow += 1;
             }
