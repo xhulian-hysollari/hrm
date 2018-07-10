@@ -253,7 +253,6 @@ class EmployeesController extends Controller
                         'personal_email' => $personalMail,
                         'email' => $emailValue,
                     ];
-                    dd($parsedData);
                     $user = User::create($parsedData);
                     $this->sendPassword($user->id);
                 }
