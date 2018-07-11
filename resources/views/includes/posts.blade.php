@@ -45,7 +45,7 @@
     <div class="col-12" style="padding: 20px">
         @foreach($post->comments as $comment)
             <div>
-                <h4>{{$comment->author}} <span style="font-size: small; font-weight: 500;">{{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}</span></h4>
+                <h4>{{$comment->author}} <span style="font-size: small; font-weight: 500;">{{\Carbon\Carbon::parse($comment->created_at)->diffForHumans()}}</span></h4>
                 {{$comment->body}}
                 <br>
             </div>

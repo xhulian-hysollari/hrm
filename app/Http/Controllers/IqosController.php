@@ -93,11 +93,16 @@ class IqosController extends Controller
                     } else {
                         $m = '';
                     }
+                    if ($reader->getCell(sprintf('N%s', $startRow))->getValue()) {
+                        $n = ' ' . $reader->getCell(sprintf('N%s', $startRow))->getValue();
+                    } else {
+                        $n = '';
+                    }
                     array_push($coach, $reader->getCell(sprintf('L%s', $startRow))->getValue());
                     array_unique($coach);
                     array_push($parsedData, [
                         'first_name' => $reader->getCell(sprintf('A%s', $startRow))->getValue(),
-                        'last_name' => $reader->getCell(sprintf('B%s', $startRow))->getValue() . $d . $k . $m,
+                        'last_name' => $reader->getCell(sprintf('B%s', $startRow))->getValue() . $d . $k . $m . $n,
                         'phone' => $reader->getCell(sprintf('E%s', $startRow))->getValue(),
                         'coach' => $reader->getCell(sprintf('L%s', $startRow))->getValue()
                     ]);
