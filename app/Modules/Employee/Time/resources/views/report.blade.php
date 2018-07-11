@@ -10,7 +10,7 @@
                     <input type="date" class="form-control" name="date_start" placeholder="{{trans('app.time.time_logs.start_date')}}" value="{{$request->date_start}}" required/>
                 </div>
                 <div class="col-md-3">
-                    <input type="date" class="form-control col-md-3" name="date_end" placeholder="{{trans('app.time.time_logs.end_date')}}" value="{{$request->date_end}}" required/>
+                    <input type="date" class="form-control" name="date_end" placeholder="{{trans('app.time.time_logs.end_date')}}" value="{{$request->date_end}}" required/>
                 </div>
                 <div class="col-md-3">
                     <button type="submit" class="btn btn-primary">{{trans('app.filter')}}</button>
