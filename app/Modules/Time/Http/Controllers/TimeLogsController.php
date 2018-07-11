@@ -220,14 +220,29 @@ class TimeLogsController extends Controller
     public function uploadTimeLogs()
     {
         $file = Input::file('attachment');
-        $data = [];
-        $maxR = [];
-        Excel::selectSheetsByIndex(2)->load($file, function ($reader) use (&$data, &$maxR) {
-            $objExcel = $reader->getExcel();
-            $sheet = $objExcel->getSheet(2);
-            $maxR = $sheet->getHighestRow();
-            $data = $this->parseLogs($sheet, $maxR);
-        });
+        $data1 = [];
+        $data2 = [];
+        $data3 = [];
+        $data4 = [];
+        $maxR1 = [];
+        $maxR2 = [];
+        $maxR3 = [];
+        $maxR4 = [];
+            Excel::selectSheetsByIndex(1,2,3,4)->load($file, function ($reader) use (&$data1, &$data2, &$data3, &$data4, &$maxR1, &$maxR2, &$maxR3, &$maxR4) {
+                $objExcel = $reader->getExcel();
+                $sheet1 = $objExcel->getSheet(1);
+                $maxR1 = $sheet1->getHighestRow();
+                $data1 = $this->parseLogs($sheet1, $maxR1);
+                $sheet2 = $objExcel->getSheet(2);
+                $maxR2 = $sheet2->getHighestRow();
+                $data2 = $this->parseLogs($sheet2, $maxR2);
+                $sheet3 = $objExcel->getSheet(3);
+                $maxR3 = $sheet3->getHighestRow();
+                $data3 = $this->parseLogs($sheet3, $maxR3);
+                $sheet4 = $objExcel->getSheet(4);
+                $maxR4 = $sheet4->getHighestRow();
+                $data4 = $this->parseLogs($sheet4, $maxR4);
+            });
         return redirect()->route('time.time_logs.index');
     }
 
@@ -237,17 +252,17 @@ class TimeLogsController extends Controller
         $skills = [];
         do {
             if (
-            trim($reader->getCell(sprintf('D%s', $startRow))->getValue() !== "")
+            trim($reader->getCell(sprintf('E%s', $startRow))->getValue() !== "")
             ) {
                 $date = $reader->getCell(sprintf('A%s', $startRow))->getValue();
-                $id = trim($reader->getCell(sprintf('D%s', $startRow))->getValue());
+                $id = trim($reader->getCell(sprintf('E%s', $startRow))->getValue());
                 $user = User::where('matricola', $id)->first();
-                if (trim($reader->getCell(sprintf('E%s', $startRow))->getValue()) == "FERIE") {
+                if (trim($reader->getCell(sprintf('F%s', $startRow))->getValue()) == "FERIE") {
                     $time = 0;
                     $reason = "FERIE";
                 } else {
-                    $time = trim($reader->getCell(sprintf('E%s', $startRow))->getValue());
-                    $reason = trim($reader->getCell(sprintf('H%s', $startRow))->getValue());
+                    $time = trim($reader->getCell(sprintf('F%s', $startRow))->getValue());
+                    $reason = trim($reader->getCell(sprintf('K%s', $startRow))->getValue());
                 }
                 if ($user) {
                     $parsedData = [
@@ -256,7 +271,10 @@ class TimeLogsController extends Controller
                         'time' => $time,
                         'reason' => $reason
                     ];
-                    TimeLog::create($parsedData);
+//                    if (Carbon::parse($parsedData['date'])->format('m') === Carbon::now()->subMonth()->format('m')) {
+//                        dd($parsedData);
+                        TimeLog::create($parsedData);
+//                    }
                 }
             }
             $startRow += 1;
