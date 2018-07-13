@@ -49,7 +49,7 @@ class IqosController extends Controller
             $filePath = storage_path('excel/exports');
             // Create ZipArchive Obj
             $zip = new ZipArchive;
-            if ($zip->open(public_path() . '/' . $zipFileName, ZipArchive::CREATE) === TRUE) {
+            if ($zip->open(storage_path() . '/' . $zipFileName, ZipArchive::CREATE) === TRUE) {
                 foreach (File::allFiles($filePath) as $file){
                     $zip->addFile($file, $file->getRelativePathname());
                 }
@@ -59,7 +59,7 @@ class IqosController extends Controller
             $headers = array(
                 'Content-Type' => 'application/octet-stream',
             );
-            $fileToPath=public_path($zipFileName);
+            $fileToPath=storage_path($zipFileName);
             // Create Download Response
             if(file_exists($fileToPath)){
                 return response()->download($fileToPath,$zipFileName,$headers)->deleteFileAfterSend(true);
