@@ -18,27 +18,27 @@
             </form>
             </div>
             <h3>{{trans('app.time.time_logs.total_time')}}: {{format_hours($totalHours)}}</h3>
-            <ul class="list-group nested-accordion">
+            <ul class="list-group">
                 @foreach($clientLogs as $clientLog)
                 <li class="list-group-item">
-                    <a class="accordion-title" href="#">{{$clientLog->client}}: <b>{{format_hours($clientLog->time)}}</b></a>
-                    <ul>
-                        @foreach($clientLog->projectLogs as $projectLog)
-                        <li>
-                            <a class="accordion-title" href="#">{{$projectLog->project}}: <b>{{format_hours($projectLog->time)}}</b></a>
-                            <ul>
-                                @foreach($projectLog->taskLogs as $taskLog)
-                                <li>
-                                    <a class="accordion-title" href="#">{{$taskLog->task_name}}: <b>{{format_hours($taskLog->time)}}</b></a>
-                                    <ul>
-                                        <li>{{$taskLog->task_description}} <a href="{{route('time.time_logs.edit', $taskLog->log_id)}}" class="btn btn-default btn-xs">{{trans('app.edit')}}</a></li>
-                                    </ul>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </li>
-                        @endforeach
-                    </ul>
+                    <a href="#">{{$clientLog->date}}: <b>{{format_hours($clientLog->time)}}</b> : {{$clientLog->reason}}</a>
+                    {{--<ul>--}}
+                        {{--@foreach($clientLog->projectLogs as $projectLog)--}}
+                        {{--<li>--}}
+                            {{--<a class="accordion-title" href="#">{{$projectLog->project}}: <b>{{format_hours($projectLog->time)}}</b></a>--}}
+                            {{--<ul>--}}
+                                {{--@foreach($projectLog->taskLogs as $taskLog)--}}
+                                {{--<li>--}}
+                                    {{--<a class="accordion-title" href="#">{{$taskLog->task_name}}: <b>{{format_hours($taskLog->time)}}</b></a>--}}
+                                    {{--<ul>--}}
+                                        {{--<li>{{$taskLog->task_description}} <a href="{{route('time.time_logs.edit', $taskLog->log_id)}}" class="btn btn-default btn-xs">{{trans('app.edit')}}</a></li>--}}
+                                    {{--</ul>--}}
+                                {{--</li>--}}
+                                {{--@endforeach--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--@endforeach--}}
+                    {{--</ul>--}}
                 </li>
                 @endforeach
             </ul>

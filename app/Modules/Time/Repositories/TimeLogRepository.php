@@ -35,6 +35,14 @@ class TimeLogRepository extends EloquentRepository implements TimeLogRepositoryI
     public function getEmployeeReport($userId, $dateFrom, $dateTo, $group = 'task', $where = [])
     {
         switch ($group) {
+            case 'total':
+                $groupBy = 'time_logs.user_id';
+                $select = [
+                    'date',
+                    DB::raw('sum(time) as time'),
+                    'reason',
+                ];
+                break;
             case 'client':
                 $groupBy = 'projects.client_id';
                 $select = [
@@ -67,17 +75,15 @@ class TimeLogRepository extends EloquentRepository implements TimeLogRepositoryI
                 ];
                 break;
         }
-        $timeLog = TimeLog::join('projects', 'projects.id', '=', 'time_logs.project_id')
-            ->join('clients', 'clients.id', '=', 'projects.client_id')
-            ->whereBetween('date', [$dateFrom, $dateTo])
+        $timeLog = TimeLog::whereBetween('date', [$dateFrom, $dateTo])
             ->where('user_id', $userId)
             ->whereNull('time_logs.deleted_at');
-        if(!empty($where)) {
-            $timeLog = $timeLog->where($where);
-        }
-        $timeLog = $timeLog->groupBy($groupBy)
-            ->select($select)
-            ->get();
+//        if(!empty($where)) {
+//            $timeLog = $timeLog->where($where);
+//        }
+        $timeLog = $timeLog->groupBy('date')->get(['date',
+            DB::raw('sum(time) as time'),
+            'reason']);
         return $timeLog;
     }
 

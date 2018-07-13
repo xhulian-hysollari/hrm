@@ -181,14 +181,15 @@ class TimeLogsController extends Controller
         }
         $employee = $employeeRepository->getById($userId);
         $breadcrumb = ['title' => $employee->first_name . ' ' . $employee->last_name, 'id' => $employee->id];
-        $clientLogs = $timeLogRepository->getEmployeeReport($userId, $start, $end, 'client');
+        $clientLogs = $timeLogRepository->getEmployeeReport($userId, $start, $end, 'total');
         $totalHours = 0;
         foreach ($clientLogs as $i => $clientLog) {
             $totalHours += $clientLog->time;
-            $clientLogs[$i]->projectLogs = $timeLogRepository->getEmployeeReport($userId, $start, $end, 'project', ['projects.client_id' => $clientLog->client_id]);
-            foreach ($clientLogs[$i]->projectLogs as $j => $projectLog) {
-                $clientLogs[$i]->projectLogs[$j]->taskLogs = $timeLogRepository->getEmployeeReport($userId, $start, $end, 'task', ['time_logs.project_id' => $projectLog->project_id]);
-            }
+
+//            $clientLogs[$i]->projectLogs = $timeLogRepository->getEmployeeReport($userId, $start, $end, 'project', ['projects.client_id' => $clientLog->client_id]);
+//            foreach ($clientLogs[$i]->projectLogs as $j => $projectLog) {
+//                $clientLogs[$i]->projectLogs[$j]->taskLogs = $timeLogRepository->getEmployeeReport($userId, $start, $end, 'task', ['time_logs.project_id' => $projectLog->project_id]);
+//            }
         }
         return view('time::time_logs.employee_report', compact('breadcrumb', 'clientLogs', 'totalHours', 'request'));
     }
