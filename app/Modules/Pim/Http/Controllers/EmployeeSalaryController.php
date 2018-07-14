@@ -302,17 +302,19 @@ class EmployeeSalaryController extends Controller
                 if ($user) {
                     $salary = CurrentSalary::where('user_id', $user->id)->latest()->first();
                     if ($salary) {
-                        if ($salary->amount !== $parsedData['net_salary']) {
+                        if ($salary->amount !== $parsedData['net_salary'] && $parsedData['net_salary'] != null) {
                             $salary->amount = $parsedData['net_salary'];
                             $salary->save();
                         }
-                    }else{
-                        $salary = new CurrentSalary();
-                        $salary->amount = $parsedData['net_salary'];
-                        $salary->user_id = $user->id;
-                        $salary->type = 1;
-                        $salary->currency_id = Currency::where('currency_code', 'ALL')->first()->id;
-                        $salary->save();
+                    } else {
+                        if ($parsedData['net_salary'] != null) {
+                            $salary = new CurrentSalary();
+                            $salary->amount = $parsedData['net_salary'];
+                            $salary->user_id = $user->id;
+                            $salary->type = 1;
+                            $salary->currency_id = Currency::where('currency_code', 'ALL')->first()->id;
+                            $salary->save();
+                        }
                     }
                     $paymentDate = Carbon::now()->startOfMonth()->addDays(14);
                     $salaryData = ['payment_date' => $paymentDate, 'user_id' => $user->id];
@@ -329,7 +331,7 @@ class EmployeeSalaryController extends Controller
                             $contract_type_id = ContractType::where('name', 'Full Time')->first()->id;
                             break;
                     }
-                    if($contract_type_id !== '' && $user->contract_type !== $contract_type_id){
+                    if ($contract_type_id !== '' && $user->contract_type !== $contract_type_id) {
                         $user->contract_type = $contract_type_id;
                         $user->save();
                     }
