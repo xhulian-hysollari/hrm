@@ -72,6 +72,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
             ]
         ]
     );
+
+    Route::post('salaries/upload', '\App\Modules\PIM\Http\Controllers\EmployeeSalaryController@uploadSalaries')
+        ->name('salaries.upload');
+
     Route::group(['prefix' => 'settings', 'as' => 'settings.', 'middleware' => ['auth', 'admin']], function () {
         Route::get('/', function () {
             return view('settings::index');
@@ -272,6 +276,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
                 'update' => 'salaries.update',
                 'destroy' => 'salaries.destroy'
             ]]);
+
             Route::post('salaries/config-salary', '\App\Modules\Pim\Http\Controllers\EmployeeSalaryController@configSalary')
                 ->name('salaries.config_salary');
             Route::group(['prefix' => 'qualifications', 'as' => 'qualifications.'], function ($employeeId) {

@@ -53,7 +53,7 @@ class EmployeeSalaryRequest extends FormRequest
     public function messages()
     {
         $fields = $this->salaryComponentRepository->getAll();
-
+        $messages = [];
         foreach ($fields as $key => $value) {
             $messages['components.'.$value->id.'.required'] = $value->name.' is required.';
         }
