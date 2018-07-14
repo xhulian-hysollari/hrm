@@ -4,7 +4,7 @@
         <div class="col-sm-12">
             <div class="custom-panel">
                 <div class="custom-panel-heading">{{trans('app.pim.employees.documents.add_new')}}</div>
-                {!! Form::open(['route' => ['salaries.upload'], 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
+                {!! Form::open(['route' => ['pim.salaries.upload'], 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
                 <div class="form-group">
                     {!! Form::label('attachment', trans('app.pim.employees.documents.attachment'), ['class' => 'col-sm-3']) !!}
                     <div class="col-sm-6">

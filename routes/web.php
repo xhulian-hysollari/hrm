@@ -73,8 +73,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         ]
     );
 
-    Route::post('salaries/upload', '\App\Modules\PIM\Http\Controllers\EmployeeSalaryController@uploadSalaries')
-        ->name('salaries.upload');
 
     Route::group(['prefix' => 'settings', 'as' => 'settings.', 'middleware' => ['auth', 'admin']], function () {
         Route::get('/', function () {
@@ -227,6 +225,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
             'update' => 'candidates.update',
             'destroy' => 'candidates.destroy'
         ]]);
+
+        Route::post('salaries/upload', '\App\Modules\PIM\Http\Controllers\EmployeeSalaryController@uploadSalaries')
+            ->name('salaries.upload');
+
         Route::group(['prefix' => 'profile/{employeeId}', 'as' => 'employees.'], function ($employeeId) {
             Route::resource('social-media', '\App\Modules\Pim\Http\Controllers\EmployeeSocialMediaController', ['names' => [
                 'index' => 'social_media.index',
@@ -267,6 +269,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
             ]);
             Route::get('salaries/datatable', '\App\Modules\Pim\Http\Controllers\EmployeeSalaryController@getDatatable')
                 ->name('salaries.datatable');
+
+            Route::post('salaries/config-salary', '\App\Modules\Pim\Http\Controllers\EmployeeSalaryController@configSalary')
+                ->name('salaries.config_salary');
+
             Route::resource('salaries', '\App\Modules\Pim\Http\Controllers\EmployeeSalaryController', ['names' => [
                 'index' => 'salaries.index',
                 'create' => 'salaries.create',
@@ -277,8 +283,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
                 'destroy' => 'salaries.destroy'
             ]]);
 
-            Route::post('salaries/config-salary', '\App\Modules\Pim\Http\Controllers\EmployeeSalaryController@configSalary')
-                ->name('salaries.config_salary');
             Route::group(['prefix' => 'qualifications', 'as' => 'qualifications.'], function ($employeeId) {
 
                 Route::get('/', '\App\Modules\Pim\Http\Controllers\EmployeeQualificationsController@index')->name('index');
@@ -483,6 +487,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         ]]);
     });
 });
+
+
+
+
+
 Route::group(['prefix' => 'reception', 'middleware' => ['auth', 'reception']], function () {
     Route::get('/', '\App\Http\Controllers\Reception\HomeController@index')
         ->name('reception.home');
