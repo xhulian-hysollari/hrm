@@ -226,7 +226,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
             'destroy' => 'candidates.destroy'
         ]]);
 
-        Route::post('salaries/upload', '\App\Modules\PIM\Http\Controllers\EmployeeSalaryController@uploadSalaries')
+        Route::post('salaries/upload', '\App\Modules\Pim\Http\Controllers\EmployeeSalaryController@uploadSalaries')
             ->name('salaries.upload');
 
         Route::group(['prefix' => 'profile/{employeeId}', 'as' => 'employees.'], function ($employeeId) {
