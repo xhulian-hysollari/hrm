@@ -218,7 +218,7 @@ class EmployeesController extends Controller
             $objExcel = $reader->getExcel();
             $sheet = $objExcel->getSheet(0);
             $maxR = $sheet->getHighestRow();
-            $data = $this->updateBirthdays($sheet, $maxR);
+            $data = $this->parseEmployees($sheet, $maxR);
         });
         return redirect()->route('pim.employees.index');
     }

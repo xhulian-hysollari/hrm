@@ -229,20 +229,10 @@ class TimeLogsController extends Controller
         $maxR2 = [];
         $maxR3 = [];
         $maxR4 = [];
-            Excel::selectSheetsByIndex(1,2,3,4)->load($file, function ($reader) use (&$data1, &$data2, &$data3, &$data4, &$maxR1, &$maxR2, &$maxR3, &$maxR4) {
+            Excel::selectSheetsByIndex(0)->load($file, function ($reader) use (&$data1, &$data2, &$data3, &$data4, &$maxR1, &$maxR2, &$maxR3, &$maxR4) {
                 $objExcel = $reader->getExcel();
-                $sheet1 = $objExcel->getSheet(1);
+                $sheet1 = $objExcel->getSheet(0);
                 $maxR1 = $sheet1->getHighestRow();
-                $data1 = $this->parseLogs($sheet1, $maxR1);
-                $sheet2 = $objExcel->getSheet(2);
-                $maxR2 = $sheet2->getHighestRow();
-                $data2 = $this->parseLogs($sheet2, $maxR2);
-                $sheet3 = $objExcel->getSheet(3);
-                $maxR3 = $sheet3->getHighestRow();
-                $data3 = $this->parseLogs($sheet3, $maxR3);
-                $sheet4 = $objExcel->getSheet(4);
-                $maxR4 = $sheet4->getHighestRow();
-                $data4 = $this->parseLogs($sheet4, $maxR4);
             });
         return redirect()->route('time.time_logs.index');
     }
