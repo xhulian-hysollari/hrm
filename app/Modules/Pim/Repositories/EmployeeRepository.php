@@ -36,10 +36,11 @@ class EmployeeRepository extends EloquentRepository implements EmployeeRepositor
 
         $events = [];
         foreach ($items as $key => $value) {
-            $birthday = Carbon::createFromFormat('Y-m-d', $value->birth_date);
+            $birthday = Carbon::parse($value->birth_date);
             $events[]= [
                 'title' => $value->first_name.' '.$value->last_name,
-                'start' => Carbon::createFromDate(null, $birthday->month, $birthday->day)->format('Y-m-d')
+                'start' => $birthday,
+                'end' => $birthday,
             ];
         }
 
