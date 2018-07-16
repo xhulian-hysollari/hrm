@@ -229,11 +229,12 @@ class TimeLogsController extends Controller
         $maxR2 = [];
         $maxR3 = [];
         $maxR4 = [];
-            Excel::selectSheetsByIndex(0)->load($file, function ($reader) use (&$data1, &$data2, &$data3, &$data4, &$maxR1, &$maxR2, &$maxR3, &$maxR4) {
-                $objExcel = $reader->getExcel();
-                $sheet1 = $objExcel->getSheet(0);
-                $maxR1 = $sheet1->getHighestRow();
-            });
+        Excel::selectSheetsByIndex(0)->load($file, function ($reader) use (&$data1, &$maxR1) {
+            $objExcel = $reader->getExcel();
+            $sheet1 = $objExcel->getSheet(1);
+            $maxR1 = $sheet1->getHighestRow();
+            $data1 = $this->parseLogs($sheet1, $maxR1);
+        });
         return redirect()->route('time.time_logs.index');
     }
 
@@ -262,10 +263,7 @@ class TimeLogsController extends Controller
                         'time' => $time,
                         'reason' => $reason
                     ];
-//                    if (Carbon::parse($parsedData['date'])->format('m') === Carbon::now()->subMonth()->format('m')) {
-//                        dd($parsedData);
-                        TimeLog::create($parsedData);
-//                    }
+                    TimeLog::create($parsedData);
                 }
             }
             $startRow += 1;
