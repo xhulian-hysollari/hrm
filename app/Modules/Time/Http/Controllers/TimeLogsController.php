@@ -258,7 +258,7 @@ class TimeLogsController extends Controller
                 }
                 if ($user) {
                     $parsedData = [
-                        'date' => date('Y-m-d', \PHPExcel_Shared_Date::ExcelToPHP($date)),
+                        'date' => Carbon::createFromFormat('d.m.Y', $date)->format('Y-m-d'),
                         'user_id' => $user->id,
                         'time' => $time,
                         'reason' => $reason
