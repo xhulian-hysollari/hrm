@@ -318,6 +318,12 @@ class EmployeeSalaryController extends Controller
                         }
                     }
                     $paymentDate = Carbon::now()->startOfMonth()->addDays(14);
+                    if($paymentDate->dayOfWeek === Carbon::SUNDAY){
+                        $paymentDate->addDay();
+                    }
+                    if ($paymentDate->dayOfWeek === Carbon::SATURDAY){
+                        $paymentDate->subDay();
+                    }
                     $salaryData = ['payment_date' => $paymentDate, 'user_id' => $user->id];
                     $createdSalary = $this->employeeSalaryRepository->create($salaryData);
                     $contract_type_id = '';
