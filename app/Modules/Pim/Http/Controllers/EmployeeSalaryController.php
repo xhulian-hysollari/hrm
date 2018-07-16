@@ -290,13 +290,13 @@ class EmployeeSalaryController extends Controller
                     'evening_50_salary' => $reader->getCell(sprintf('N%s', $startRow))->getCalculatedValue(),
                     'sick_days' => $reader->getCell(sprintf('O%s', $startRow))->getCalculatedValue(),
                     'holidays' => $reader->getCell(sprintf('F%s', $startRow))->getCalculatedValue(),
-                    'holiday_salary' => $reader->getCell(sprintf('Q%s', $startRow))->getCalculatedValue(),
+                    'holiday_wage' => $reader->getCell(sprintf('Q%s', $startRow))->getCalculatedValue(),
                     'incentive' => $reader->getCell(sprintf('R%s', $startRow))->getCalculatedValue(),
                     'base_wage' => $reader->getCell(sprintf('S%s', $startRow))->getCalculatedValue(),
                     'evening_50_wage' => $reader->getCell(sprintf('T%s', $startRow))->getCalculatedValue(),
                     'extra_wage' => $reader->getCell(sprintf('U%s', $startRow))->getCalculatedValue(),
                     'sick_wage' => $reader->getCell(sprintf('V%s', $startRow))->getCalculatedValue(),
-                    'holiday_wage' => $reader->getCell(sprintf('Y%s', $startRow))->getCalculatedValue(),
+                    'leave_wage' => $reader->getCell(sprintf('Y%s', $startRow))->getCalculatedValue(),
                     'net_wage' => $reader->getCell(sprintf('Z%s', $startRow))->getCalculatedValue()
                 ];
                 $user = User::where('matricola', $parsedData['matricola'])->first();
@@ -343,11 +343,12 @@ class EmployeeSalaryController extends Controller
                         $user->save();
                     }
                     $components = [
-                        'Y1' => 'holiday_wage',
+                        'Q1' => 'holiday_wage',
                         'R1' => 'incentive',
                         'S1' => 'base_wage',
                         'T1' => 'evening_50_wage',
                         'U1' => 'extra_wage',
+                        'Y1' => 'leave_wage',
                         'V1' => 'sick_wage'
                     ];
                     $total = $expense = 0;
