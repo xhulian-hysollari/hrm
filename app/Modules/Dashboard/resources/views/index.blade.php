@@ -30,16 +30,15 @@
 @endsection
 @section('additionalCSS')
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.print.css"
-          media='print'>
+    <link href="{{asset('vendors/css/fullcalendar.min.css')}}" rel="stylesheet">
 @endsection
 @section('additionalJS')
-    <script src="{{asset('vendor/moment/moment.min.js')}}"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js"></script>
+    <script src="{{asset('vendors/js/fullcalendar.min.js')}}"></script>
+    <script src="{{asset('vendors/js/gcal.min.js')}}"></script>
+
     <script>
         $(document).ready(function () {
-            var sources = [];
+            let sources = [];
             $('#leave-calendar').fullCalendar({
                 header: {
                     left: 'prev,next',
@@ -51,7 +50,7 @@
                 editable: false,
                 eventLimit: true, // allow "more" link when too many events
                 viewRender: function (view, element) {
-                    var date = $('#leave-calendar').fullCalendar('getDate');
+                    let date = $('#leave-calendar').fullCalendar('getDate');
                     date = moment(date).format('YYYY-MM-DD');
                     if (sources.indexOf(date) == -1) {
                         sources.push(date);
@@ -65,7 +64,7 @@
                     }
                 }
             });
-            var sources = [];
+            let sources2 = [];
             $('#birthday-calendar').fullCalendar({
                 header: {
                     left: 'prev,next',
@@ -77,15 +76,17 @@
                 editable: false,
                 eventLimit: true, // allow "more" link when too many events
                 viewRender: function (view, element) {
-                    var date = $('#birthday-calendar').fullCalendar('getDate');
+                    let date = $('#birthday-calendar').fullCalendar('getDate');
                     date = moment(date).format('YYYY-MM-DD');
-                    if (sources.indexOf(date) == -1) {
-                        sources.push(date);
+                    if (sources2.indexOf(date) == -1) {
+                        sources2.push(date);
+                        console.log(sources2);
                         $.ajax({
                             url: "{{route('pim.employees.birthdays')}}",
                             data: {date: date},
                             success: function (events) {
                                 $('#birthday-calendar').fullCalendar('addEventSource', events);
+                                console.log(events)
                             }
                         });
                     }

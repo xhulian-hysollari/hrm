@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     @include('includes.head')
+    @yield('additionalCSS')
 </head>
 <body style="z-index:-1;background-color: #f6f6f6">
 @include('includes.header')
@@ -35,7 +36,6 @@
 
 @include('includes.footer')
 
-@yield('additionalCSS')
 @yield('additionalJS')
 </body>
 </html>

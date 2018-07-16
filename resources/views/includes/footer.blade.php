@@ -17,23 +17,12 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<script
-  src="//code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="{{asset('js/main.js')}}"></script>
-
 
 <script src="{{asset('vendors/js/jquery.min.js')}}"></script>
 <script src="{{asset('vendors/js/popper.min.js')}}"></script>
 <script src="{{asset('vendors/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('vendors/js/pace.min.js')}}"></script>
-<script src="{{asset('vendors/js/Chart.min.js')}}"></script>
-<script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('vendors/js/toastr.min.js')}}"></script>
 <script src="{{asset('vendors/js/gauge.min.js')}}"></script>
 <script src="{{asset('vendors/js/moment.min.js')}}"></script>
 <script src="{{asset('vendors/js/daterangepicker.min.js')}}"></script>
-<script src="{{asset('js/views/main.js')}}"></script>

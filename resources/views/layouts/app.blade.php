@@ -41,9 +41,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{asset('old/js/app.js')}}"></script>
-<script src="{{asset('vendors/js/jquery.min.js')}}"></script>
-<script src="{{asset('vendors/js/popper.min.js')}}"></script>
-<script src="{{asset('vendors/js/bootstrap.min.js')}}"></script>
+@include('includes.footer')
 </body>
 </html>

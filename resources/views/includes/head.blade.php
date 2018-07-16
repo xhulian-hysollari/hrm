@@ -11,6 +11,7 @@
 <link href="{{asset('vendors/css/daterangepicker.min.css')}}" rel="stylesheet">
 <link href="{{asset('vendors/css/gauge.min.css')}}" rel="stylesheet">
 <link href="{{asset('vendors/css/toastr.min.css')}}" rel="stylesheet">
+<link href="{{asset('vendors/css/fullcalendar.css')}}" rel="stylesheet">
 
 <style>
     .custom-panel-heading{
