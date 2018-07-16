@@ -231,7 +231,7 @@ class TimeLogsController extends Controller
         $maxR4 = [];
         Excel::selectSheetsByIndex(0)->load($file, function ($reader) use (&$data1, &$maxR1) {
             $objExcel = $reader->getExcel();
-            $sheet1 = $objExcel->getSheet(1);
+            $sheet1 = $objExcel->getSheet(0);
             $maxR1 = $sheet1->getHighestRow();
             $data1 = $this->parseLogs($sheet1, $maxR1);
         });
