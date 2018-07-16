@@ -76,4 +76,8 @@
     .help-block{
         color:#aa5500;
     }
+
+    .fc-scroller.fc-day-grid-container{
+        width: 100%;
+    }
 </style>
