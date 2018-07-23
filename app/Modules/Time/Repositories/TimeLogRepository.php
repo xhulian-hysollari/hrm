@@ -38,6 +38,7 @@ class TimeLogRepository extends EloquentRepository implements TimeLogRepositoryI
             case 'total':
                 $groupBy = 'time_logs.user_id';
                 $select = [
+                    'time_logs.id as log_id',
                     'date',
                     DB::raw('sum(time) as time'),
                     'reason',
@@ -46,6 +47,7 @@ class TimeLogRepository extends EloquentRepository implements TimeLogRepositoryI
             case 'client':
                 $groupBy = 'projects.client_id';
                 $select = [
+                    'time_logs.id as log_id',
                     'clients.name as client',
                     DB::raw('sum(time) as time'),
                     'projects.client_id',
@@ -54,6 +56,7 @@ class TimeLogRepository extends EloquentRepository implements TimeLogRepositoryI
             case 'project':
                 $groupBy = 'time_logs.project_id';
                 $select = [
+                    'time_logs.id as log_id',
                     'clients.name as client', 
                     'projects.name as project', 
                     DB::raw('sum(time) as time'), 
@@ -81,7 +84,8 @@ class TimeLogRepository extends EloquentRepository implements TimeLogRepositoryI
 //        if(!empty($where)) {
 //            $timeLog = $timeLog->where($where);
 //        }
-        $timeLog = $timeLog->groupBy('date')->get(['date',
+        $timeLog = $timeLog->groupBy('date')->get([
+            'id', 'date',
             DB::raw('sum(time) as time'),
             'reason']);
         return $timeLog;
