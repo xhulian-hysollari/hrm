@@ -68,7 +68,7 @@
             // serverSide: true,
             ajax: '{{ route("time.time_logs.datatable")}}',
             columns: [
-                {data: 0, name: 'user_id', sortable: false, searchable: false},
+                {data: 0, name: 'user_id', sortable: true, searchable: true},
                 {data: 1, name: 'time', sortable: true, searchable: false}
             ]
         });
