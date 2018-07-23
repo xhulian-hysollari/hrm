@@ -138,7 +138,7 @@ class TimeLogsController extends Controller
      * @param  \App\Modules\Settings\Http\Requests\TimeLogRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function update($id, TimeLogRequest $request)
+    public function update($id, Request $request)
     {
         $timeLogData = $this->timeLogRepository->update($id, $request->all());
         $request->session()->flash('success', trans('app.time.time_logs.update_success'));
