@@ -64,8 +64,8 @@
 <script>
     $(document).ready(function(){
         var table = $('#timeLogTable').DataTable({
-            processing: true,
-            serverSide: true,
+            // processing: true,
+            // serverSide: true,
             ajax: '{{ route("time.time_logs.datatable")}}',
             columns: [
                 {data: 0, name: 'user_id', sortable: false, searchable: false},
