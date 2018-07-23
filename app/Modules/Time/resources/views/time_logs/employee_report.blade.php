@@ -21,7 +21,9 @@
             <ul class="list-group">
                 @foreach($clientLogs as $clientLog)
                 <li class="list-group-item">
-                    <a href="#">{{$clientLog->date}}: <b>{{format_hours($clientLog->time)}}</b> : {{$clientLog->reason}}</a>
+                    <a class="accordion-title" href="{{route('time.time_logs.edit', $clientLog->id)}}">{{$clientLog->date}}: <b>{{format_hours($clientLog->time)}}</b> : {{$clientLog->reason}}</a>
+
+{{--                    <a class="accordion-title" href="">{{$clientLog->client}}: <b>{{format_hours($clientLog->time)}}</b></a>--}}
                     {{--<ul>--}}
                         {{--@foreach($clientLog->projectLogs as $projectLog)--}}
                         {{--<li>--}}
