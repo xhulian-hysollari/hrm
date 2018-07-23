@@ -1,25 +1,7 @@
 <div class="form-group">
-    {!! Form::label('task_name', trans('app.time.time_logs.task_name').':', ['class' => 'col-sm-3']) !!}
+    {!! Form::label('reason', 'Reason:', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
-        {!! Form::text('task_name', null, ['class' => 'form-control']) !!}
-    </div>
-</div>
-<div class="form-group">
-    {!! Form::label('task_description', trans('app.time.time_logs.task_description').':', ['class' => 'col-sm-3']) !!}
-    <div class="col-sm-6">
-        {!! Form::textarea('task_description', null, ['class' => 'form-control']) !!}
-    </div>
-</div>
-<div class="form-group">
-    {!! Form::label('project_id', trans('app.time.time_logs.project'), ['class' => 'col-sm-3']) !!}
-    <div class="col-sm-6">
-        {!! Form::select('project_id', $projects, null, ['class' => 'form-control projects']) !!}
-    </div>
-</div>
-<div class="form-group">
-    {!! Form::label('user_id', trans('app.time.time_logs.employee'), ['class' => 'col-sm-3']) !!}
-    <div class="col-sm-6">
-        {!! Form::select('user_id', $employees, null, ['class' => 'form-control employees']) !!}
+        {!! Form::text('reason', null, ['class' => 'form-control']) !!}
     </div>
 </div>
 <div class="form-group">
@@ -31,7 +13,7 @@
 <div class="form-group">
     {!! Form::label('date', trans('app.time.time_logs.date').':', ['class' => 'col-sm-3']) !!}
     <div class="col-sm-6">
-        {!! Form::input('date', 'date', null, ['class' => 'form-control']) !!}
+        {!! Form::input('date', 'date', null, ['class' => 'form-control', 'disabled']) !!}
     </div>
 </div>
 @include('errors._form-errors')
