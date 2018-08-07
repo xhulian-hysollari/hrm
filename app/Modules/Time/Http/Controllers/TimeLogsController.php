@@ -253,7 +253,7 @@ class TimeLogsController extends Controller
                     $time = 0;
                     $reason = "FERIE";
                 } else {
-                    $time = trim($reader->getCell(sprintf('F%s', $startRow))->getValue());
+                    $time = trim($reader->getCell(sprintf('F%s', $startRow))->getCalculatedValue());
                     $reason = trim($reader->getCell(sprintf('K%s', $startRow))->getValue());
                 }
                 if ($user) {
