@@ -222,9 +222,6 @@ class TimeLogsController extends Controller
     {
         $file = Input::file('attachment');
         $data1 = [];
-        $data2 = [];
-        $data3 = [];
-        $data4 = [];
         $maxR1 = [];
         $maxR2 = [];
         $maxR3 = [];
@@ -253,7 +250,7 @@ class TimeLogsController extends Controller
                     $time = 0;
                     $reason = "FERIE";
                 } else {
-                    $time = trim(str_replace(',','.', $reader->getCell(sprintf('F%s', $startRow))->getCalculatedValue()));
+                    $time = trim(str_replace(',','.', $reader->getCell(sprintf('G%s', $startRow))->getCalculatedValue()));
                     $reason = trim($reader->getCell(sprintf('K%s', $startRow))->getValue());
                 }
                 if ($user) {
